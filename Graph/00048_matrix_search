@@ -1,0 +1,63 @@
+Given a matrix of integers, with each element containing either 0, 1, or 2. your task is to find the longest diagonal segment which matches the following pattern: 1, 2, 0, 2, 0, 2, 0, (where the first element is s and then 2 and o are repeating infinitely), and return the length of this diagonal segment
+
+The diagonal segment:
+
+• May start and end at any matrix element
+
+• May go toward any possible diagonal direction
+
+See the example videos below.
+
+ote: You are not expected to provide the most optimal solution, but a solution with time complexity not wo
+
+matrix.length² matrix[0].length²) will fit within the execution time limit.
+
+
+# java
+
+import java.util.*;
+
+public class LongestDiagonalPattern {
+  private static final int[][] DIRECTIONS = {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}};
+
+  public static int solution(int[][] matrix) {
+    int maxLen = 0, rows = matrix.length, cols = matrix[0].length;
+
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols; j++) {
+        if (matrix[i][j] == 1) {
+          for (int[] dir : DIRECTIONS) {
+            maxLen = Math.max(maxLen, checkPattern(matrix, i, j, dir[0], dir[1]));
+          }
+        }
+      }
+    }
+    return maxLen;
+  }
+
+  private static int checkPattern(int[][] matrix, int x, int y, int dx, int dy) {
+    int count = 1, rows = matrix.length, cols = matrix[0].length;
+    int[] pattern = {1, 2, 0};
+
+    for (int step = 1; ; step++) {
+      int nx = x + dx * step, ny = y + dy * step;
+      if (nx < 0 || ny < 0 || nx >= rows || ny >= cols || matrix[nx][ny] != pattern[step % 3]) break;
+      count++;
+    }
+    return count;
+  }
+
+  public static void main(String[] args) {
+    int[][] matrix = {
+      {1, 0, 2, 0, 1},
+      {2, 1, 2, 0, 2},
+      {0, 2, 1, 2, 0},
+      {2, 0, 2, 1, 2},
+      {0, 2, 0, 2, 1}
+    };
+    System.out.println(solution(matrix)); // Output: Longest segment length
+  }
+}
+
+
+
