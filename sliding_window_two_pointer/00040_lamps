@@ -1,0 +1,43 @@
+Imagine that there are several lamps placed on a number line, each of which illuminates some segment of the line. Specifically, the lamps are represented in a two-dimensional array Lamp where the ith lamp covers the segment from lamps[i][0] to lamps[i][1], inclusive.
+
+Additionally, you are given a list of control points on this number line, represented by an array points. Your task is to find the number of lamps that illuminate each control point. Specifically. for each control point points[j] in the array, your task is to find the number of lamps lamps[i] which include this point within its covered segment - when points[j] lies inside the segment [lamps[i][0], lamps [i][1]]
+
+As a result, return an array of integers, where ith integer corresponds to the answer for the ith control point.
+
+
+# java
+
+import java.util.*;
+
+public class LampCoverage {
+  public static int[] countIlluminatedPoints(int[][] lamps, int[] points) {
+    TreeMap<Integer, Integer> events = new TreeMap<>();
+    
+    for (int[] lamp : lamps) {
+      events.put(lamp[0], events.getOrDefault(lamp[0], 0) + 1);
+      events.put(lamp[1] + 1, events.getOrDefault(lamp[1] + 1, 0) - 1);
+    }
+
+    TreeMap<Integer, Integer> illumination = new TreeMap<>();
+    int activeLamps = 0;
+    
+    for (var entry : events.entrySet()) {
+      activeLamps += entry.getValue();
+      illumination.put(entry.getKey(), activeLamps);
+    }
+
+    int[] result = new int[points.length];
+    for (int i = 0; i < points.length; i++) {
+      Map.Entry<Integer, Integer> entry = illumination.floorEntry(points[i]);
+      result[i] = (entry == null) ? 0 : entry.getValue();
+    }
+
+    return result;
+  }
+
+  public static void main(String[] args) {
+    int[][] lamps = { {1, 5}, {3, 7}, {4, 6} };
+    int[] points = {2, 4, 6, 8};
+    System.out.println(Arrays.toString(countIlluminatedPoints(lamps, points)));
+  }
+}
