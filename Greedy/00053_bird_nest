@@ -1,0 +1,58 @@
+You are helping the bind build te nest. You are given an array ferees containing positive integers and zeros, ant a non-negative integer segrest within the ceress is hidered to be a stick, where the cove(s) represents the length of the stick Each zero with represents that these
+
+Initially, the bird is locatect it which is guaranteed to be zero. The bird builds its nest, following the algorithm
+
+The bird flies to the night until it finds a stick
+
+The bird files back to its initial position and attaches the found stick to the nest
+
+The bird repeats steps one and two, but changes the flight direction - it now flies to the left;
+
+The bird will repeat steps one and two, changing to the opposite direction each time, until the total length of the sticks in the nest reaches 149
+
+It is guaranteed that the total length of all sticks in the forest is greater or equal to 100 More formally, it is guaranteed that sum format) 2 100
+
+The forest is large, so we can safely guarantee that the bird will never reach the end of the forest during the process. More formally, if you follow the algorithm, you will never meet any of these sit
+
+The bird flies to the right, but forest[i] o for every 1 > bird:
+
+The bird flies to the left, but forest[i]o for every bird;
+
+Follow the process and return the array containing o-based indices within the initial forest array of every stick found by the bird, sorted in the order in which it found them
+
+te: You are not expected to provide the most optimal solution, but a solution with time complexity not worse than o(forest.length) will fit within the execution time limit
+
+ample
+
+For forest [25, 0, 50, 0, 0, 0, 0, 15, 0, 0, 45] and bird 4, the output should be solution (forest, bird) = [7, 2, 101
+
+# java
+
+import java.util.*;
+
+public class BirdNestBuilder {
+  public static List<Integer> solution(int[] forest, int bird) {
+    List<Integer> sticks = new ArrayList<>();
+    int nestSize = 0, direction = 1, step = 1, n = forest.length;
+
+    while (nestSize < 149) {
+      int pos = bird;
+      while (pos >= 0 && pos < n && forest[pos] == 0) {
+        pos += direction * step;
+      }
+      if (pos >= 0 && pos < n) {
+        sticks.add(pos);
+        nestSize += forest[pos];
+        forest[pos] = 0;
+      }
+      direction *= -1;
+    }
+    return sticks;
+  }
+
+  public static void main(String[] args) {
+    int[] forest = {25, 0, 50, 0, 0, 0, 0, 15, 0, 0, 45};
+    int bird = 4;
+    System.out.println(solution(forest, bird)); // Output: [7, 2, 10]
+  }
+}
