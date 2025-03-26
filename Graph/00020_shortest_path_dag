@@ -29,7 +29,7 @@ class Solution {
 
 	public int[] shortestPath(int N,int M, int[][] edges) {
 	    
-		    ArrayList < ArrayList < Pair >> adj = new ArrayList < > ();
+	ArrayList < ArrayList < Pair >> adj = new ArrayList < > ();
         for (int i = 0; i < N; i++) {
           ArrayList < Pair > temp = new ArrayList < Pair > ();
           adj.add(temp);
