@@ -42,8 +42,9 @@ class Solution
             // Check for all adjacent nodes of the popped out
             // element whether the prev dist is larger than current or not.
             for(int i = 0;i<adj.get(node).size();i++) {
-                int edgeWeight = adj.get(node).get(i).get(1); 
+                
                 int adjNode = adj.get(node).get(i).get(0); 
+		int edgeWeight = adj.get(node).get(i).get(1); 
                 
                 // If current distance is smaller,
                 // push it into the queue.
