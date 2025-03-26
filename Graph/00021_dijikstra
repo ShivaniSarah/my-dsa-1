@@ -16,7 +16,7 @@ class Solution
     //from the source vertex S.
     static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S)
     {
-        // Create a priority queue for storing the nodes as a pair {dist, node
+        // Create a min priority queue for storing the nodes as a pair {dist, node
         // where dist is the distance from source to the node.  
         PriorityQueue<Pair> pq = 
         new PriorityQueue<Pair>((x,y) -> x.distance - y.distance);
