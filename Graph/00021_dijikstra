@@ -1,6 +1,8 @@
 https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1
 
-# Using Priority Queue
+# Using Priority Queue 
+
+# we can use queue also in place of it just that priority queue arrives at answer faster
 
 class Pair{
     int node;
