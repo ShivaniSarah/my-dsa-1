@@ -1,0 +1,87 @@
+Refer 00018 
+eg : ['nxt','nmt','nlt'] o/p [ n, [x,m,l],t] => where n, [x,m,l], t are independent of order 
+
+
+
+# java
+
+package org.example;
+
+import java.util.*;
+
+class AlienDictionaryGroups {
+    public List<List<Character>> findIndependentOrders(String[] words) {
+        Map<Character, Set<Character>> graph = new HashMap<>();
+        Map<Character, Integer> inDegree = new HashMap<>();
+        buildGraph(words, graph, inDegree);
+        return getGroupedTopologicalOrder(graph, inDegree);
+    }
+
+    private void buildGraph(String[] words, Map<Character, Set<Character>> graph, Map<Character, Integer> inDegree) {
+        for (String word : words) {
+            for (char c : word.toCharArray()) {
+                graph.putIfAbsent(c, new HashSet<>());
+                inDegree.putIfAbsent(c, 0);
+            }
+        }
+
+        for (int i = 0; i < words.length - 1; i++) {
+            String w1 = words[i], w2 = words[i + 1];
+            int minLen = Math.min(w1.length(), w2.length());
+            boolean found = false;
+            for (int j = 0; j < minLen; j++) {
+                char c1 = w1.charAt(j), c2 = w2.charAt(j);
+                if (c1 != c2) {
+                    if (!graph.get(c1).contains(c2)) {
+                        graph.get(c1).add(c2);
+                        inDegree.put(c2, inDegree.get(c2) + 1);
+                    }
+                    found = true;
+                    break;
+                }
+            }
+            if (!found && w1.length() > w2.length()) {
+                graph.clear();
+                return;
+            }
+        }
+    }
+
+    private List<List<Character>> getGroupedTopologicalOrder(Map<Character, Set<Character>> graph, Map<Character, Integer> inDegree) {
+        List<List<Character>> result = new ArrayList<>();
+        Queue<List<Character>> queue = new LinkedList<>();
+
+        for (Character c : inDegree.keySet()) {
+            if (inDegree.get(c) == 0) {
+                List<Character> m=new ArrayList<>();
+                m.add(c);
+                queue.offer(m);
+
+            }
+        }
+
+        while (!queue.isEmpty()) {
+
+            List<Character> c  = queue.poll();
+            boolean found =true;
+                for (Character neighbor : graph.get(c.get(c.size()-1))) {
+                    found = false;
+                    inDegree.put(neighbor, inDegree.get(neighbor) - 1);
+                    if (inDegree.get(neighbor) == 0) {
+                        c.add(neighbor);
+                        queue.offer(c);
+                    }
+                }
+            if (found ) result.add(c);
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        AlienDictionaryGroups solver = new AlienDictionaryGroups();
+//        String[] words = {"nxtq", "nmtr", "nnty"};
+        String[] words = {"nxt", "nmt", "nlt"};
+        System.out.println(solver.findIndependentOrders(words));
+    }
+}
