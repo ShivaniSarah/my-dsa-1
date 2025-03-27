@@ -105,3 +105,7 @@ class Solution {
     }
 }
 
+TC: the total time complexity is O((n + m) * (k + 1)), which simplifies to O(m * k) in most cases.
+where n is no of edges , m is no of nodes, k is no of stops
+
+SC: O(n + m + n * (k + 1)), which simplifies to O(n + m + nk)
