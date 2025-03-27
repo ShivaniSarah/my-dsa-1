@@ -83,3 +83,21 @@ public class tUf {
         System.out.println("");
     }
 }
+
+Time Complexity Analysis
+Bellman-Ford runs in O(V × E) time because:
+It relaxes all edges (E edges) in (V - 1) iterations → O(V × E).
+An additional iteration is performed to check for a negative cycle → O(E).
+Thus, the final worst-case time complexity is:
+O(VE)
+Worst-case scenario:
+Dense graph: When 
+E≈V^2 , the complexity becomes O(V³).
+
+Space Complexity Analysis
+
+Distance Array: Stores the shortest distances for V vertices → O(V).
+Edge List: Stores E edges → O(E).
+Other variables (loop counters, temp array, etc.) are negligible.
+Thus, the total space complexity is:
+O(V+E)
