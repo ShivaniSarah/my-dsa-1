@@ -1,0 +1,15 @@
+# variation I: calculate nCr 
+
+def nCr(n, r):
+    res = 1
+
+    # calculating nCr:
+    for i in range(r):
+        res = res * (n - i)
+        res = res // (i + 1)
+
+    return res
+
+def pascalTriangle(r, c):
+    element = nCr(r - 1, c - 1)
+    return element
