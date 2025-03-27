@@ -48,7 +48,7 @@ public static int[] findValidPairs(int serverNodes, int[] serverFrom, int[] serv
     
             result[i] = count;
 
-// my logic is to get the no of nodes % signalSpeed and find permutations of it
+// my logic is to get the no of nodes % signalSpeed and find permutations of it nP2
         }
 
         return result;
