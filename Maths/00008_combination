@@ -4,19 +4,14 @@ public class CombinationCalculator {
     public static long nCr(int n, int r) {
         long res = 1;
         for (int i = 0; i < r; i++) {
-            res *= (n - i);
-            res /= (i + 1);
+            res = res * (n - i) / (i + 1);
         }
         return res;
     }
 
-    public static long pascalTriangle(int r, int c) {
-        return nCr(r - 1, c - 1);
-    }
-
     public static void main(String[] args) {
-        int r = 5, c = 3;
-        System.out.println("Pascal Triangle Element at (" + r + "," + c + ") = " + pascalTriangle(r, c));
+        int n = 5, r = 2;
+        System.out.println("5C2 = " + nCr(n, r)); // Output: 10
     }
 }
 
