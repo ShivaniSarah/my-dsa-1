@@ -287,7 +287,7 @@ for(int z:path)
 
 Relaxation means checking if the shortest known distance to v (dist[v]) can be improved by taking the edge (u → v).
 
-Time Complexity Analysis using PQ
+Time Complexity Analysis using PQ as well as Ordered Set
 
 The algorithm implements Dijkstra's algorithm using a Min-Heap (Priority Queue). Let's break it down:
 Initialization:
@@ -302,7 +302,7 @@ Thus, the total time complexity is:
 
 O((V+E)logV)≈O(ElogV)  (since in a connected graph, E≥V
 
-Space Complexity Analysis using PQ
+Space Complexity Analysis using PQ as well as Ordered Set
 
 Adjacency List Storage:
 The graph is stored as an adjacency list, which takes O(V + E) space.
