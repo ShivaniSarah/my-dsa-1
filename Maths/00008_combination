@@ -1,5 +1,3 @@
-# variation I: calculate nCr
-
 nCr = n! / (r! * (n-r)!)
 
 def nCr(n, r):
