@@ -46,8 +46,8 @@ class Pair {
     }
 }
 class Solution {
-    int minimumMultiplications(int[] arr, 
-    int start, int end) {
+
+    int minimumMultiplications(int[] arr, int start, int end) {
 
         // Create a queue for storing the numbers as a result of multiplication
         // of the numbers in the array and the start number.
