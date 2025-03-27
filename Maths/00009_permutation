@@ -1,0 +1,10 @@
+ nPr = n! / (n-r)!
+
+def nPr(n, r):
+    res = 1
+    for i in range(r):
+        res *= (n - i)
+    return res
+
+def permutationElement(r, c):
+    return nPr(r - 1, c - 1)
