@@ -1,15 +1,22 @@
 nCr = n! / (r! * (n-r)!)
 
-def nCr(n, r):
-    res = 1
+public class CombinationCalculator {
+    public static long nCr(int n, int r) {
+        long res = 1;
+        for (int i = 0; i < r; i++) {
+            res *= (n - i);
+            res /= (i + 1);
+        }
+        return res;
+    }
 
-    # calculating nCr:
-    for i in range(r):
-        res = res * (n - i)
-        res = res // (i + 1)
+    public static long pascalTriangle(int r, int c) {
+        return nCr(r - 1, c - 1);
+    }
 
-    return res
+    public static void main(String[] args) {
+        int r = 5, c = 3;
+        System.out.println("Pascal Triangle Element at (" + r + "," + c + ") = " + pascalTriangle(r, c));
+    }
+}
 
-def pascalTriangle(r, c):
-    element = nCr(r - 1, c - 1)
-    return element
