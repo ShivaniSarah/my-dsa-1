@@ -80,3 +80,5 @@ class Solution {
         return dist;
 	}
 }
+
+TC = SC = O(N+M) for N nodes and M edges
