@@ -96,3 +96,6 @@ public class tUf {
         }
     }
 } 
+
+Time Complexity: O(V³)
+Space Complexity: O(V²)
