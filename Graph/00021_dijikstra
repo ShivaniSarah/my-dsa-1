@@ -62,8 +62,48 @@ class Solution
     }
 }
 
+# Using queue
+
+import java.util.*;
+
+class Pair {
+    int node, distance;
+    public Pair(int node, int distance) {
+        this.node = node;
+        this.distance = distance;
+    }
+}
+
+class Solution {
+    public int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S) {
+        int[] dist = new int[V];
+        Arrays.fill(dist, (int) 1e9);
+        dist[S] = 0;
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(S);
+
+        while (!queue.isEmpty()) {
+            int node = queue.poll();
+
+            for (ArrayList<Integer> neighbor : adj.get(node)) {
+                int adjNode = neighbor.get(0);
+                int edgeWeight = neighbor.get(1);
+
+                if (dist[node] + edgeWeight < dist[adjNode]) {
+                    dist[adjNode] = dist[node] + edgeWeight;
+                    queue.add(adjNode);
+                }
+            }
+        }
+        return dist;
+    }
+}
+
+
 # Using Set
 # only possible in c++ as c++ has set.begin() functionality
+# Yes, in C++, std::set is ordered, while in Java, only TreeSet is ordered, whereas HashSet is not ordered.
 
 class Solution
 {
@@ -120,7 +160,8 @@ class Solution
     }
 };
 
-# Using queue or checking all the possible paths brute force kind or dfs : optimal path is not explored as of PQ priority queue or set
+
+# checking all the possible paths brute force kind or dfs : optimal path is not explored as of PQ priority queue or set
 
 import java.util.Scanner;
 class dijkstra
@@ -242,3 +283,59 @@ for(int z:path)
 }//main
 }//class dijkstra
 
+//
+
+Relaxation means checking if the shortest known distance to v (dist[v]) can be improved by taking the edge (u → v).
+
+Time Complexity Analysis using PQ
+
+The algorithm implements Dijkstra's algorithm using a Min-Heap (Priority Queue). Let's break it down:
+Initialization:
+Creating the dist array takes O(V) time.
+Initializing the priority queue takes O(1) time.
+Processing nodes (while loop):
+Each vertex is pushed into the priority queue once and popped once, leading to O(V log V) operations (since insertion and deletion in a priority queue take O(log V) time).
+Processing edges:
+Each edge is relaxed at most once, and we perform a decrease-key operation in the priority queue, which takes O(log V).
+Since we iterate over all edges, this takes O(E log V) time.
+Thus, the total time complexity is:
+
+O((V+E)logV)≈O(ElogV)  (since in a connected graph, E≥V
+
+Space Complexity Analysis using PQ
+
+Adjacency List Storage:
+The graph is stored as an adjacency list, which takes O(V + E) space.
+Distance Array (dist):
+Stores distances for each of the V vertices → O(V) space.
+Priority Queue (pq):
+Stores at most V elements → O(V) space.
+Thus, the total space complexity is:
+O(V+E)
+
+Time Complexity Analysis using queue:
+
+Initialization:
+Distance array initialization: O(V)
+Adding the source to the queue: O(1)
+Processing Nodes in Queue:
+Each node can be added to the queue multiple times (but usually ≤ O(V) times in practice).
+We process all E edges, so O(E) operations occur.
+Relaxing Edges:
+Each edge is relaxed at most once, leading to O(E) updates.
+Worst-case complexity:
+O(VE)
+(If we process each node multiple times) 
+Consider a complete directed graph with V nodes where:
+Every node is connected to every other node.
+Each edge has a very small weight (e.g., 1).
+Best/Average case complexity:
+O(E)
+(If each node is processed only once)
+
+Space Complexity Analysis using queue:
+
+Distance array: O(V)
+Adjacency list: O(V + E)
+Queue: O(V) (at most V elements at a time)
+O(V+E)
