@@ -52,7 +52,7 @@ class Solution {
         // Create a queue for storing the numbers as a result of multiplication
         // of the numbers in the array and the start number.
         Queue<Pair> q = new LinkedList<>(); 
-        q.add(new Pair(start, 0)); 
+        q.add(new Pair(start, 0));  // product, node
 
         // Create a dist array to store the no. of multiplications to reach
         // a particular number from the start number.
