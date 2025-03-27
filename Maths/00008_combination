@@ -1,4 +1,6 @@
-# variation I: calculate nCr 
+# variation I: calculate nCr
+
+nCr = n! / (r! * (n-r)!)
 
 def nCr(n, r):
     res = 1
