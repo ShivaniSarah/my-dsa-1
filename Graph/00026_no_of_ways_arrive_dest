@@ -34,6 +34,7 @@ Explanation: There is only one way to go from intersection 0 to intersection 1, 
 # Java
 
 class Pair {
+// distance, node
     long first;
     int second;
     public Pair(long first, int second) {
@@ -42,6 +43,7 @@ class Pair {
     }
 }
 class Pair1{
+// node, distance
     int first;
     long second;
     public Pair1(int first, long second) {
