@@ -1,6 +1,8 @@
 # following two methods use adjacency list as input
 
 # TC = SC = O(V+E) where V is the noof vertex and E is no of edges
+worst time complexity: Since a dense graph has O(V²) edges, this step takes O(V²).
+O(V+E)=O(V+V^2)=O(V^2)
 
 # Time Complexity: O(N) + O(2E), Where N = Nodes, 2E is for total degrees as we traverse all adjacent nodes.
 
