@@ -1,2 +1,68 @@
 https://leetcode.com/problems/network-delay-time/description/
 
+class Pair{
+    int dist;
+    int node;
+    Pair(int dist, int node){
+        this.dist = dist;
+        this.node = node;
+    }
+}
+
+class Solution {
+    public int networkDelayTime(int[][] times, int n, int k) {
+        
+        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<>();
+        for(int i = 0;i<=n;i++){
+            adj.add(new ArrayList<>());
+        }
+
+        for(int i =0;i<times.length;i++){
+            int u = times[i][0];
+            int v = times[i][1];
+            int wt = times[i][2];
+            ArrayList<Integer> temp = new ArrayList<>();
+            temp.add(v);
+            temp.add(wt);
+            adj.get(u).add(temp);
+        }
+
+        int dist[] = new int[n+1];
+        for(int i=0;i<=n;i++){
+            dist[i] = (int)(1e9);
+        }
+
+        dist[k]=0;
+
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(0,k));
+        int maxi = 0;
+        
+        while(!q.isEmpty()){
+            Pair p = q.poll();
+            int dis = p.dist;
+            int node = p.node;
+
+            for(int i =0; i<adj.get(node).size();i++){
+                int adjNode = adj.get(node).get(i).get(0);
+                int wt = adj.get(node).get(i).get(1);
+
+                if(dis+wt<dist[adjNode]){
+                   dist[adjNode]= dis+wt;
+                   q.add(new Pair(dist[adjNode],adjNode));
+                   
+                }
+            }
+        }
+  
+        int c=0;
+        for(int i= 1;i<=n;i++ ){
+            if(dist[i] == 1e9) c++;
+            maxi = Math.max(maxi,dist[i]);
+        }
+
+        if(c>0) return -1;
+        return maxi;
+
+    }
+}
