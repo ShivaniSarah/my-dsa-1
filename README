@@ -269,7 +269,7 @@ List<int[]> result = new ArrayList<>();
 return result.toArray(new int[result.size()][]);
 
 
-set contains and amp containsKey
+set contains and map containsKey
 
 print basic array
 int arr[]= new int[]{1,4,6,54,};
