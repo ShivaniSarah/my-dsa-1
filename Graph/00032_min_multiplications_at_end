@@ -148,8 +148,9 @@ class Solution {
 }
 
 
-or
+package org.example;
 
+import java.util.*;
 
 class Solution {
     private int f(int[] arr, int current, int end, int steps){
@@ -164,7 +165,8 @@ class Solution {
         return mini;
     }
     public int minMultiplications(int[] arr, int start, int end) {
-        return f(arr,start,end,0);
+        int s = f(arr,start,end,0);
+        return s==Integer.MAX_VALUE ?-1:s;
     }
 }
 
@@ -178,3 +180,4 @@ public class Main {
         System.out.println(result);
     }
 }
+
