@@ -147,6 +147,7 @@ class Solution {
     }
 }
 
+or using Recursion
 
 package org.example;
 
@@ -181,3 +182,43 @@ public class Main {
     }
 }
 
+or using memoization:
+
+import java.util.Arrays;
+
+class Solution {
+    private int f(int[] arr, int current, int end, int steps, int[] dp) {
+        if (current == end) return steps;
+        if (dp[current] != -1 && dp[current] <= steps) return Integer.MAX_VALUE; // Avoid revisiting worse paths
+
+        dp[current] = steps; // Store minimum steps to reach `current`
+
+        int mini = Integer.MAX_VALUE;
+        for (int num : arr) {
+            int next = (current * num) % 100000;
+            mini = Math.min(mini, f(arr, next, end, steps + 1, dp));
+        }
+        return mini;
+    }
+
+    int minimumMultiplications(int[] arr, int start, int end) {
+        if (start == end) return 0;
+
+        int[] dp = new int[100000];
+        Arrays.fill(dp, -1);
+
+        int result = f(arr, start, end, 0, dp);
+        return result == Integer.MAX_VALUE ? -1 : result;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 5, 7};
+        int start = 3, end = 30;
+
+        Solution obj = new Solution();
+        int result = obj.minimumMultiplications(arr, start, end);
+        System.out.println(result);
+    }
+}
