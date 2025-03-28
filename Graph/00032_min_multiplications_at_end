@@ -222,3 +222,41 @@ public class Main {
         System.out.println(result);
     }
 }
+
+# dp way not so correct
+
+import java.util.Arrays;
+
+class Solution {
+    int minimumMultiplications(int[] arr, int start, int end) {
+        if (start == end) return 0;
+        
+        int mod = 100000;
+        int[] dp = new int[mod]; 
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[start] = 0; 
+
+        // Fill the DP table
+        for (int i = 0; i < mod; i++) {
+            if (dp[i] == Integer.MAX_VALUE) continue; // Skip unreachable numbers
+
+            for (int num : arr) {
+                int next = (i * num) % mod;
+                dp[next] = Math.min(dp[next], dp[i] + 1);
+            }
+        }
+
+        return dp[end] == Integer.MAX_VALUE ? -1 : dp[end];
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 5, 7};
+        int start = 3, end = 30;
+
+        Solution obj = new Solution();
+        int result = obj.minimumMultiplications(arr, start, end);
+        System.out.println(result);
+    }
+}
