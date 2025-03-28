@@ -3,6 +3,9 @@ https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1
 A spanning tree is a tree in which we have N nodes(i.e. 
 All the nodes present in the original graph) and N-1 edges and all nodes are reachable from each other.
 
+Multiple spanning trees can be formed for given N nodes meaning multiple combinations of N-1 edges can be formed giving rise to a new tree.
+we have to find the spanning tree with minimum sum of weights which is called minimum spanning tree.
+
 class Pair {
     int node;
     int distance;
