@@ -146,3 +146,35 @@ class Solution {
         return -1; 
     }
 }
+
+
+or
+
+
+class Solution {
+    private int f(int[] arr, int current, int end, int steps){
+        if( current == end ) return steps;
+        if(current>end) return Integer.MAX_VALUE;
+        int mini = Integer.MAX_VALUE;
+
+        for(int i=0;i<arr.length;i++){
+            int s = f(arr,arr[i]*current,end,steps+1);
+            mini= Math.min(mini, s );
+        }
+        return mini;
+    }
+    public int minMultiplications(int[] arr, int start, int end) {
+        return f(arr,start,end,0);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {2, 9, 7};
+        int start = 3, end = 54;
+
+        Solution obj = new Solution();
+        int result = obj.minMultiplications(arr, start, end);
+        System.out.println(result);
+    }
+}
