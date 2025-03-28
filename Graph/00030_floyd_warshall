@@ -33,9 +33,6 @@ is already given (if it exists).
 
 import java.util.*;
 
-
-//User function template for JAVA
-
 class Solution {
     public void shortest_distance(int[][] matrix) {
         int n = matrix.length;
