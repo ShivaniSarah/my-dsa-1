@@ -7,6 +7,8 @@ if they fall in different connected components then return false.
 We can use dfs or bfs but we have to find it in O(1) time. Also it is useful in dynamic graph , means we keep adding or deleting nodes
 and know if two nodes are connected or not in O(1) time.
 
+Union By Rank and Union By Size:
+
 import java.io.*;
 import java.util.*;
 class DisjointSet {
