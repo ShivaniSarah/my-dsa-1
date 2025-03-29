@@ -49,7 +49,7 @@ If n ≤ 10^6, the time complexity can be O(n log n).
 If n ≤ 10^8, the time complexity can be O(n).
 If n > 10^8, the time complexity can be O(log n) or O(1).
 
-dont use temp array if contraint is > 10^5
+dont use temp array if contraint is > 10^5 max upto 10^7 for 64mb , 2d array 10^3
 think nlogn => sorting , binary search, heap
 
 Revisit:
