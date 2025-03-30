@@ -2,6 +2,8 @@ Refer 00018
 eg : ['nxt','nmt','nlt'] o/p [ n, [x,m,l],t] => where n, [x,m,l], t are independent of order 
 
 
+in this type of question either find different unconnected components and do topo sort on one dag or print all paths
+
 
 # java
 
@@ -9,74 +11,82 @@ package org.example;
 
 import java.util.*;
 
-class AlienDictionaryGroups {
-    public List<List<Character>> findIndependentOrders(String[] words) {
-        Map<Character, Set<Character>> graph = new HashMap<>();
-        Map<Character, Integer> inDegree = new HashMap<>();
-        buildGraph(words, graph, inDegree);
-        return getGroupedTopologicalOrder(graph, inDegree);
-    }
-
-    private void buildGraph(String[] words, Map<Character, Set<Character>> graph, Map<Character, Integer> inDegree) {
-        for (String word : words) {
-            for (char c : word.toCharArray()) {
-                graph.putIfAbsent(c, new HashSet<>());
-                inDegree.putIfAbsent(c, 0);
+class Main {
+    // Function to return list containing vertices in Topological order.
+    static List<List<Integer>> topoSort(int V, ArrayList<ArrayList<Integer>> adj) {
+        int indegree[] = new int[V];
+        for (int i = 0; i < V; i++) {
+            for (int it : adj.get(i)) {
+                indegree[it]++;
             }
         }
 
-        for (int i = 0; i < words.length - 1; i++) {
-            String w1 = words[i], w2 = words[i + 1];
-            int minLen = Math.min(w1.length(), w2.length());
-            boolean found = false;
-            for (int j = 0; j < minLen; j++) {
-                char c1 = w1.charAt(j), c2 = w2.charAt(j);
-                if (c1 != c2) {
-                    if (!graph.get(c1).contains(c2)) {
-                        graph.get(c1).add(c2);
-                        inDegree.put(c2, inDegree.get(c2) + 1);
-                    }
-                    found = true;
-                    break;
-                }
-            }
-            if (!found && w1.length() > w2.length()) {
-                graph.clear();
-                return;
-            }
-        }
-    }
+        List<List<Integer>> result = new ArrayList<>();
+        Queue<List<Integer>> queue = new LinkedList<>();
 
-    private List<List<Character>> getGroupedTopologicalOrder(Map<Character, Set<Character>> graph, Map<Character, Integer> inDegree) {
-        List<List<Character>> result = new ArrayList<>();
-        Queue<List<Character>> queue = new LinkedList<>();
-
-        for (Character c : inDegree.keySet()) {
-            if (inDegree.get(c) == 0) {
-                List<Character> m=new ArrayList<>();
-                m.add(c);
-                queue.offer(m);
-
+        for (int i = 0; i < V; i++) {
+            if (indegree[i] == 0) {
+                List<Integer> m = new ArrayList<>();
+                m.add(i);
+                queue.offer(new ArrayList<>(m));
             }
         }
 
         while (!queue.isEmpty()) {
+            System.out.println(queue);
+            List<Integer> path = queue.poll();
+            boolean found = true;
 
-            List<Character> c  = queue.poll();
-            boolean found =true;
-                for (Character neighbor : graph.get(c.get(c.size()-1))) {
-                    found = false;
-                    inDegree.put(neighbor, inDegree.get(neighbor) - 1);
-                    if (inDegree.get(neighbor) == 0) {
-                        c.add(neighbor);
-                        queue.offer(c);
-                    }
+            for (int neighbor : adj.get(path.get(path.size() - 1))) {
+                found = false;
+                indegree[neighbor]--;
+                List<Integer> newPath = new ArrayList<>(path);
+                newPath.add(neighbor);
+                if (indegree[neighbor] == 0) {
+
+                    queue.offer(newPath);
                 }
-            if (found ) result.add(c);
+               else if(adj.get(neighbor).size()==0) result.add(newPath);
+            }
+
+            if (found) {
+                result.add(path);
+            }
         }
 
         return result;
     }
+
+    // Main method with test cases
+    public static void main(String[] args) {
+        int V = 8;
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for (int i = 0; i < V; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        // Example graph:
+        adj.get(5).add(2);
+        adj.get(5).add(0);
+        adj.get(4).add(0);
+        adj.get(4).add(1);
+        adj.get(2).add(3);
+        adj.get(2).add(6);
+        adj.get(3).add(1);
+        adj.get(0).add(7);
+
+        List<List<Integer>> topoPaths = topoSort(V, adj);
+
+        // Print the topological paths
+        System.out.println("Topological Sort Paths:");
+        for (List<Integer> path : topoPaths) {
+            System.out.println(path);
+        }
+    }
+}
+
+
+# test cases
 
     public static void main(String[] args) {
         AlienDictionaryGroups solver = new AlienDictionaryGroups();
