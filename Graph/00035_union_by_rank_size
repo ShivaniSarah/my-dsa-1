@@ -7,6 +7,10 @@ if they fall in different connected components then return false.
 We can use dfs or bfs but we have to find it in O(1) time. Also it is useful in dynamic graph , means we keep adding or deleting nodes
 and know if two nodes are connected or not in O(1) time.
 
+No, the Union-Find algorithm with union by rank or size is not directly applicable to Directed Acyclic Graphs (DAGs) 
+because it relies on the concept of equivalence relations, which assumes bidirectional connectivity, 
+while DAGs have directed, one-way relationships. 
+
 Union By Rank and Union By Size:
 
 import java.io.*;
