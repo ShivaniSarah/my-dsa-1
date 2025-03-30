@@ -2,7 +2,9 @@ Refer 00018
 eg : ['nxt','nmt','nlt'] o/p [ n, [x,m,l],t] => where n, [x,m,l], t are independent of order 
 
 
-in this type of question either find different unconnected components and do topo sort on one dag or print all paths
+in this type of question either find different unconnected components and do topo sort on one dag or print all paths.
+
+one unsolved question : how to separate multiple dags and run topo sort on each dag separately
 
 
 # java
