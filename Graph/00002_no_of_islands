@@ -26,6 +26,7 @@ For graph like this :
     ↓
     1
 This algo doesnt give correct results as it is a directed graph 
+Answer is 2 connected components even though it looks like its 1 component
 
 For strongly connected components (SCCs) in a directed graph, Kosaraju’s Algorithm (DFS + Transpose Graph + DFS Again) is a better approach. The above approach works because the given graph has a simple structure.
 
