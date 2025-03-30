@@ -24,17 +24,19 @@ class Main {
 
     public static void main(String[] args) {
         Map<Integer, List<Integer>> graph = new HashMap<>();
-        graph.put(0, Arrays.asList(1, 2));
-        graph.put(1, Arrays.asList(3, 4));
-        graph.put(2, Arrays.asList(5, 6));
-        graph.put(3, Collections.emptyList());
-        graph.put(4, Collections.emptyList());
-        graph.put(5, Arrays.asList(7, 8));
+        graph.put(0, Arrays.asList(7));
+        graph.put(1, Collections.emptyList());
+        graph.put(2, Arrays.asList(3,6));
+        graph.put(3, Arrays.asList(1));
+        graph.put(4, Arrays.asList(0,1));
+        graph.put(5, Arrays.asList(0,2));
         graph.put(6, Collections.emptyList());
         graph.put(7, Collections.emptyList());
-        graph.put(8, Collections.emptyList());
 
-        List<List<Integer>> paths = findAllPaths(graph, 0);
-        System.out.println(paths);
+        List<List<Integer>> paths1 = findAllPaths(graph, 5);
+        List<List<Integer>> paths2 = findAllPaths(graph, 4);
+        paths1.addAll(paths2);
+        System.out.println(paths1);
+
     }
 }
