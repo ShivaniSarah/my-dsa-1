@@ -68,3 +68,40 @@ public class Main {
     }
 }
 
+or 
+
+# this gives wrong answer
+
+import java.util.*;
+
+public class MaximumProfit {
+    public static int findMaximumProfit(List<Integer> category, List<Integer> price) {
+        int n = category.size();
+        List<int[]> items = new ArrayList<>();
+        
+        for (int i = 0; i < n; i++) {
+            items.add(new int[]{category.get(i), price.get(i)});
+        }
+        
+        items.sort((a, b) -> Integer.compare(b[1], a[1]));
+        
+        Set<Integer> seenCategories = new HashSet<>();
+        int profit = 0;
+        int distinctCategories = 0;
+        
+        for (int[] item : items) {
+            if (seenCategories.add(item[0])) {
+                distinctCategories++;
+            }
+            profit += item[1] * distinctCategories;
+        }
+        
+        return profit;
+    }
+    
+    public static void main(String[] args) {
+        List<Integer> category = Arrays.asList(3, 1, 2, 3);
+        List<Integer> price = Arrays.asList(2, 1, 4, 4);
+        System.out.println(findMaximumProfit(category, price)); // Output: 29
+    }
+}
