@@ -2,9 +2,9 @@ https://leetcode.com/problems/number-of-provinces/submissions/1306236543/
 
 ———————————————————————————————————————————————————————--------------------------------------------------------------------------------
 
-# no of connected components in a matrix
+# no of connected components in an undirected graph (bidirectional) :
 
-pseudo code for getting no of connected components in an undirected graph (bidirectional) :
+pseudo code
 
 
 for i : 1-> v 
@@ -16,7 +16,7 @@ for i : 1-> v
 
 
 Also 1 note:
-For graph like this :
+For graph like this which DAG :
 
     5 → 2 → 3 → 1
     ↓
@@ -28,9 +28,8 @@ For graph like this :
 This algo doesnt give correct results as it is a directed graph 
 Answer is 2 connected components even though it looks like its 1 component
 
-For strongly connected components (SCCs) in a directed graph, Kosaraju’s Algorithm (DFS + Transpose Graph + DFS Again) is a better approach. The above approach works because the given graph has a simple structure.
-
-Would you like an SCC-based solution
+For strongly connected components (SCCs) in a directed graph, Kosaraju’s Algorithm (DFS + Transpose Graph + DFS Again)
+or Tarjan's Algorithm is a better approach. The above approach works because the given graph has a simple structure.
 
 -------------------
 
@@ -97,8 +96,8 @@ class Solution {
         return cnt; 
     }
 }
-
-
+----------------------------------------------------------------------------------------------------
+# no of connected components in a matrix
 # apply graph in matrix:
 
 import java.util.*;
