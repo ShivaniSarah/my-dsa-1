@@ -1,11 +1,15 @@
 https://www.reddit.com/r/leetcode/comments/17z9ii4/google_phone_screen_maximize_profit/?rdt=55734
 
 
-For a sale at Google Store, we have n items for sale. The items are numbered from 1 to n. The iTh item is in category[i] and has a selling price of price[i].
+For a sale at Google Store, we have n items for sale. The items are numbered from 1 to n. 
+The iTh item is in category[i] and has a selling price of price[i].
 
-We wish to sell these items in some order. The profit made on the sale of an item is equal to the product of the price of that item and the number of different categories whose items have been sold before (including this item's category). Find the maximum possible total profit that can be made by selling the items in the optimal order.
+We wish to sell these items in some order. The profit made on the sale of an item is equal to the product of the price of that item 
+and the number of different categories whose items have been sold before (including this item's category). 
+Find the maximum possible total profit that can be made by selling the items in the optimal order.
 
-Example: Consider n = 4, category = [3,1,2,3] and price = [2,1,4,4].One of the optimal order in which them items can be sold are:
+Example: Consider n = 4, category = [3,1,2,3] and price = [2,1,4,4].
+One of the optimal order in which them items can be sold are:
 
 Sell the 2nd item; category[2] = 1, price[2]= 1, number of different categories sold = 1, so profit = 1 x 1 = 1
 
@@ -18,9 +22,7 @@ Sell 4th item; category[4]= 3, price[4]= 4, number of different categories sold 
 Thus, total profit = 1 + 4 + 12 + 12 = 29.
 
 Given, size(category) = size(price)
-
 Example 2: category = [2,2,2,1,3], price = [1,2,6,4,3,5] (don't remember the correct answer, but it was in 50s, like 58 or something)
-
 long findMaximumProfit(List<Integer> categories, List<Integer> prices) {}
 
 # java
@@ -63,8 +65,10 @@ public class Main {
         List<Integer> prices = Arrays.asList(10, 11, 12, 13);
         
         System.out.println("Max Profit: " + findMaximumProfit(categories, prices)); // 106
-        System.out.println("Max Profit: " + findMaximumProfit(new ArrayList<>(List.of(3, 1, 2, 3)), new ArrayList<>(List.of(2, 1, 4, 4)))); // 29
-        System.out.println("Max Profit: " + findMaximumProfit(new ArrayList<>(List.of(2, 2, 2, 1, 3, 3)), new ArrayList<>(List.of(1, 2, 6, 4, 3, 5)))); // 58
+        System.out.println("Max Profit: " + 
+findMaximumProfit( new ArrayList<>(List.of(3, 1, 2, 3)), new ArrayList<>(List.of(2, 1, 4, 4)))); // 29
+        System.out.println("Max Profit: " + 
+findMaximumProfit( new ArrayList<>(List.of(2, 2, 2, 1, 3, 3)), new ArrayList<>(List.of(1, 2, 6, 4, 3, 5)))); // 58
     }
 }
 
