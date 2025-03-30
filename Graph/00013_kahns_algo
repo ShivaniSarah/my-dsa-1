@@ -2,7 +2,7 @@ https://www.geeksforgeeks.org/problems/topological-sort/1?utm_source=youtube&utm
 
 # Kahns Algo on Directed Acyclic Graph
 
-Topological Sort is done using BFS and queue using indegree concept
+Topological Sort is also done using BFS : queue using indegree concept
 
 1. insert all nodes with indegree = 0
 2. pop from queue , subtract the indegree by 1 of its child nodes
