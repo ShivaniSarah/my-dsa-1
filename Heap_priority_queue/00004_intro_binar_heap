@@ -14,8 +14,8 @@ The root node has the smallest value.
 Max-Heap: In a max-heap, the value of the parent node is greater than or equal to the values of its children. 
 The root node has the largest value.
 
-Given a binary heap implementation of Priority Queue. Extract the maximum element from the queue i.e. 
-remove it from the Queue and return it's value. 
+Given a binary heap implementation of max Priority Queue. Extract the maximum element from the queue i.e. 
+remove it from the Queue and return it's value.
 
 Examples :
 
