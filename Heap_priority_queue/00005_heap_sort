@@ -10,7 +10,7 @@ class GfG {
   
     // To heapify a subtree rooted with node i
     // which is an index in arr[].
-    static void heapify(int arr[], int n, int i) {
+    static void heapify(int arr[], int n, int i) { // maxHeapify
 
         // Initialize largest as root
         int largest = i; 
