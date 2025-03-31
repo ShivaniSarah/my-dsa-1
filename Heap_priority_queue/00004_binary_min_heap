@@ -12,6 +12,7 @@ This property of Binary Heap makes them suitable to be stored in an array.
 2) A Binary Heap is either Min Heap or Max Heap. In a Min Binary Heap,
 the key at the root must be minimum among all keys present in Binary Heap.
 The same property must be recursively true for all nodes in Binary Tree. Max Binary Heap is similar to MinHeap.
+But it is not sorted level order wise.
 
 Min-Heap: In a min-heap, the value of the parent node is less than or equal to the values of its children. 
 The root node has the smallest value.
