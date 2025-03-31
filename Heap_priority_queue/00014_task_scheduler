@@ -47,6 +47,56 @@ or
 
 class Solution {
     public int leastInterval(char[] tasks, int n) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (char c : tasks) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        PriorityQueue<Task> pq = new PriorityQueue<>((a, b) -> {
+            if (a.t == b.t) {
+                return b.f - a.f;
+            }
+            return a.t - b.t;
+        });
+        for (Map.Entry<Character, Integer> e : map.entrySet()) {
+            Task t = new Task(e.getKey(), e.getValue(), 0);
+            pq.add(t);
+        }
+        int t = 0;
+        while (!pq.isEmpty()) {
+            Task p = pq.peek();
+            if (t >= pq.peek().t) {
+                Task task = pq.poll();
+                if (task.f - 1 > 0) {
+                    pq.add(new Task(task.c, task.f - 1, task.t + n + 1));
+                }
+            }
+            t++;
+        }
+        return t;
+    }
+
+    class Task {
+        char c;
+        int f;
+        int t;
+
+        public Task(char c, int f, int t) {
+            this.c = c;
+            this.f = f;
+            this.t = t;
+        }
+
+        public String toString() {
+            return "c: " + c + " " + "f: " + f + " " + "t: " + t;
+        }
+    }
+}
+
+or
+
+
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
         int[] counter = new int[26];
         int max = 0;
         int maxCount = 0;
