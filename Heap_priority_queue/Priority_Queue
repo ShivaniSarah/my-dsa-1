@@ -1,6 +1,8 @@
 https://www.geeksforgeeks.org/max-heap-in-java/
 https://www.geeksforgeeks.org/priority-queue-class-in-java/
 
+Priority Queue is by default min heap if no comparator is specified.
+
 TC : build takes O(n) time and other operations takes log(n) time
 Note : By default min heap and poll pops element from front 
 
