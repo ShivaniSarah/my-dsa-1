@@ -283,3 +283,8 @@ List<Integer> categories = Arrays.asList(1, 1, 2, 3);
 Integer[] arr = {1, 4, 6, 54}; // Use Integer[] instead of int[]
 List<Integer> categories = Arrays.asList(arr);
 int[] arr2 = {1, 4, 6, 54};
+
+
+hashset is implemented by hashMap
+
+hashap implemented by hashtable and linked list to avoid collision => later tree was introduced to improve efficiency
