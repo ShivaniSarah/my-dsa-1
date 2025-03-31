@@ -22,7 +22,7 @@ Position of parent of a key at position i :  (int)(i-1)/2
 Position of left child of a key : 2*i +1
 Position of right child of a key : 2*i +2
 
-Last index of parent is n/2 -1 where n is heap size
+Last index of parent is (n-2)/2 or n/2 -1  where n is heap size
 
 # java
 
