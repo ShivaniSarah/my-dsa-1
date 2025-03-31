@@ -39,7 +39,7 @@ class KthLargest {
         pq.add(val);         //adding value in pq  no need to take care of nums array
         
         while(pq.size()>k){      //remove all the elements which we dont need  
-	   pq.remove();       // making the window of k size
+	   pq.remove(); // remove n-k times all min elements      // making the window of k size
         }
         return pq.peek();   //returning the peek element of queue
         
