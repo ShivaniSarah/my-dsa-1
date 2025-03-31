@@ -35,7 +35,7 @@ Max Heap after conversion:
 class Solution {
     static void convertMinToMaxHeap(int N, int arr[]) {
         for(int i = (N-2)/2; i>=0; i--) {  // last parent of tree
-            shiftDown(arr, i);
+            shiftDown(arr, i); // maxheapify
         }
     }
     
