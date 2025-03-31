@@ -2,6 +2,8 @@ heap sort => nlog n
 
 https://www.geeksforgeeks.org/heap-sort/
 
+To sort in ascending , max heap is used and vice versa
+
 import java.util.Arrays;
 
 class GfG {
