@@ -1,4 +1,4 @@
-https://www.geeksforgeeks.org/problems/operations-on-binary-min-heap/1
+https://www.geeksforgeeks.org/binary-heap/
 
 Heap is partial sorted data structure or not a sorted data structure
 
@@ -21,44 +21,6 @@ The root node has the largest value.
 Position of parent of a key at position i :  (int)(i-1)/2
 Position of left child of a key : 2*i +1
 Position of right child of a key : 2*i +2
-
-# question
-
-You are given an empty Binary Min Heap and some queries and your task is to implement the three methods insertKey,  deleteKey,  and extractMin on the Binary Min Heap and call them as per the query given below:
-1) 1  x  (a query of this type means to insert an element in the min-heap with value x )
-2) 2  x  (a query of this type means to remove an element at position x from the min-heap)
-3) 3  (a query like this removes the min element from the min-heap and prints it ).
-
-Example 1:
-
-Input:
-Q = 7
-Queries:
-insertKey(4)
-insertKey(2)
-extractMin()
-insertKey(6)
-deleteKey(0)
-extractMin()
-extractMin()
-Output: 2 6 - 1
-Explanation: In the first test case for
-query 
-insertKey(4) the heap will have  {4}  
-insertKey(2) the heap will be {2 4}
-extractMin() removes min element from 
-             heap ie 2 and prints it
-             now heap is {4} 
-insertKey(6) inserts 6 to heap now heap
-             is {4 6}
-deleteKey(0) delete element at position 0
-             of the heap,now heap is {6}
-extractMin() remove min element from heap
-             ie 6 and prints it  now the
-             heap is empty
-extractMin() since the heap is empty thus
-             no min element exist so -1
-             is printed.
 
 # java
 
@@ -223,6 +185,49 @@ class MinHeap {
 	} 
 } 
 
+or
+
+https://www.geeksforgeeks.org/problems/operations-on-binary-min-heap/1
+
+# question
+
+You are given an empty Binary Min Heap and some queries and your task is to implement the three methods insertKey,  deleteKey,  and extractMin on the Binary Min Heap and call them as per the query given below:
+1) 1  x  (a query of this type means to insert an element in the min-heap with value x )
+2) 2  x  (a query of this type means to remove an element at position x from the min-heap)
+3) 3  (a query like this removes the min element from the min-heap and prints it ).
+
+Example 1:
+
+Input:
+Q = 7
+Queries:
+insertKey(4)
+insertKey(2)
+extractMin()
+insertKey(6)
+deleteKey(0)
+extractMin()
+extractMin()
+Output: 2 6 - 1
+Explanation: In the first test case for
+query 
+insertKey(4) the heap will have  {4}  
+insertKey(2) the heap will be {2 4}
+extractMin() removes min element from 
+             heap ie 2 and prints it
+             now heap is {4} 
+insertKey(6) inserts 6 to heap now heap
+             is {4 6}
+deleteKey(0) delete element at position 0
+             of the heap,now heap is {6}
+extractMin() remove min element from heap
+             ie 6 and prints it  now the
+             heap is empty
+extractMin() since the heap is empty thus
+             no min element exist so -1
+             is printed.
+
+
 // Driver Code 
 class MinHeapTest { 
 	public static void main(String[] args) { 
@@ -242,8 +247,6 @@ class MinHeapTest {
 	} 
 } 
 
-
-or
 
 class MinHeap {
     int[] harr;
