@@ -288,3 +288,16 @@ int[] arr2 = {1, 4, 6, 54};
 hashSet is implemented by hashMap
 
 hashMap implemented by hashtable and linked list to avoid collision => later tree was introduced to improve efficiency
+
+use TreeSet or TreeMap when  you need to access min and max both and add element that adds in ordered format.
+
+TreeSet<Integer> set = new TreeSet<>();
+
+int min = set.first();
+int max = set.last();
+
+TreeMap<Integer, String> map = new TreeMap<>();
+
+int minKey = map.firstKey();
+int maxKey = map.lastKey();
+
