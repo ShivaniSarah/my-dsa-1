@@ -298,9 +298,21 @@ int min = set.first();
 int max = set.last();
 set.remove(max);
 set.add(max / 2);
+.contains()
 
 TreeMap<Integer, String> map = new TreeMap<>();
 
 int minKey = map.firstKey();
 int maxKey = map.lastKey();
+.containsKey()
 
+put()
+get()
+getOrDefault()
+putIfAbsent()
+computeIfAbsent()
+
+.keySet()
+.enytrySet()
+.values()
+Map.Entry<Integer,Character> e : mp.entrySet()
