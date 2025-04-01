@@ -289,7 +289,8 @@ hashSet is implemented by hashMap
 
 hashMap implemented by hashtable and linked list to avoid collision => later tree was introduced to improve efficiency
 
-use TreeSet or TreeMap when  you need to access min and max both and add element that adds in ordered format.
+use TreeSet or TreeMap when  you need to access min and max both simultaneously and add element that adds in ordered format.
+Dont use min heap or max heap at this time
 
 TreeSet<Integer> set = new TreeSet<>();
 
