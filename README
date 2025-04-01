@@ -296,6 +296,8 @@ TreeSet<Integer> set = new TreeSet<>();
 
 int min = set.first();
 int max = set.last();
+set.remove(max);
+set.add(max / 2);
 
 TreeMap<Integer, String> map = new TreeMap<>();
 
