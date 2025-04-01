@@ -325,3 +325,10 @@ computeIfAbsent()
 .enytrySet()
 .values()
 Map.Entry<Integer,Character> e : mp.entrySet()
+
+
+print array by this:
+
+System.out.println(Arrays.deepToString(pair));
+
+or override toString method of Pair class
