@@ -296,6 +296,11 @@ TreeSet<Integer> set = new TreeSet<>();
 
 int min = set.first();
 int max = set.last();
+
+Integer secondSmallest = set.higher(set.first()); // Element just greater than the smallest
+Integer secondLargest = set.lower(set.last()); // Element just smaller than the largest
+
+
 set.remove(max);
 set.add(max / 2);
 .contains()
@@ -304,6 +309,10 @@ TreeMap<Integer, String> map = new TreeMap<>();
 
 int minKey = map.firstKey();
 int maxKey = map.lastKey();
+
+Integer secondSmallestKey = map.higherKey(map.firstKey());
+Integer secondLargestKey = map.lowerKey(map.lastKey()); // Key just smaller than the largest key
+
 .containsKey()
 
 put()
