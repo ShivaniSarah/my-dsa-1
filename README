@@ -332,3 +332,17 @@ print array by this:
 System.out.println(Arrays.deepToString(pair));
 
 or override toString method of Pair class
+
+class Pair{
+    int p;
+    int c;
+    Pair(int p,int c){
+        this.p = p;
+        this.c = c;
+    }
+
+    @Override
+    public String toString(){
+        return this.p+" "+this.c;
+    }
+}
