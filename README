@@ -105,6 +105,8 @@ char[] chars = sb.toString().toCharArray();
 chars[1] = 'a';
 String str = new String(chars);
 System.out.println(str);
+adj.get(s1.charAt(ptr) - 'a').add(s2.charAt(ptr) - 'a');
+ans = ans + (char)(it + (int)('a'));
 
 Integer.MIN_VALUE;          
 Integer.MAX_VALUE;
