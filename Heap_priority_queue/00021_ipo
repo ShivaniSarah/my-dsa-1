@@ -61,6 +61,70 @@ class Solution {
         int i = 0;
         int cnt = 0;
 
+        while ( i < arr.size() || !pq.isEmpty() ) {
+            // int i=0;
+            while (i < arr.size() && w >= arr.get(i).c) {
+                pq.add(arr.get(i));
+                i++;
+            }
+            if (!pq.isEmpty()) {
+
+                Pair temp = pq.poll();
+                w += temp.p;
+                cnt++;
+                if (cnt == k)
+                    break;
+            } else
+                break;
+
+        }
+
+        return w;
+
+    }
+}
+
+or
+
+import java.util.*;
+
+class Pair {
+    int p;
+    int c;
+
+    Pair(int p, int c) {
+        this.p = p;
+        this.c = c;
+    }
+
+    @Override
+    public String toString() {
+        return this.c + " " + this.p;
+    }
+}
+
+class Solution {
+    public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
+        // ArrayList<Pair> arr = new ArrayList();
+
+        int n = profits.length;
+        ArrayList<Pair> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            arr.add(new Pair(profits[i], capital[i]));
+        }
+        Collections.sort(arr, (x, y) -> {
+            if (x.c == y.c)
+                return y.p - x.p;
+            return x.c - y.c;
+        });
+        PriorityQueue<Pair> pq = new PriorityQueue<>(
+                (x, y) -> {
+                    return y.p - x.p;
+                });
+
+        int i = 0;
+        int cnt = 0;
+
         while ( cnt < k) {
             // int i=0;
             while (i < arr.size() && w >= arr.get(i).c) {
