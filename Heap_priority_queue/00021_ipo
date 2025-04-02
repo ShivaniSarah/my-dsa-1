@@ -21,6 +21,99 @@ Since you can choose at most 2 projects, you need to finish the project indexed 
 Therefore, output the final maximized capital, which is 0 + 1 + 3 = 4.
 
 # java
+
+import java.util.*;
+
+class Pair {
+    int p;
+    int c;
+
+    Pair(int p, int c) {
+        this.p = p;
+        this.c = c;
+    }
+
+    @Override
+    public String toString() {
+        return this.c + " " + this.p;
+    }
+}
+
+class Solution {
+    public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
+        // ArrayList<Pair> arr = new ArrayList();
+
+        int n = profits.length;
+        ArrayList<Pair> arr = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            arr.add(new Pair(profits[i], capital[i]));
+        }
+        Collections.sort(arr, (x, y) -> {
+            if (x.c == y.c)
+                return y.p - x.p;
+            return x.c - y.c;
+        });
+        PriorityQueue<Pair> pq = new PriorityQueue<>(
+                (x, y) -> {
+                    return y.p - x.p;
+                });
+
+        int i = 0;
+        int cnt = 0;
+
+        while (i < arr.size() && w >= arr.get(i).c) {
+            pq.add(arr.get(i));
+            i++;
+        }
+
+        while (k> 0) {
+            if (!pq.isEmpty()) {
+                Pair temp = pq.poll();
+                w += temp.p;
+            }
+            while (i < arr.size() && w >= arr.get(i).c) {
+                pq.add(arr.get(i));
+                i++;
+            }
+            k--;
+        }
+        return w;
+
+    }
+}
+
+or
+
+class Solution {
+    public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
+        
+        List<int[]> list = new ArrayList<>();
+        for (int i = 0; i < profits.length; i++) {
+            list.add(new int[]{profits[i], capital[i]});
+        }
+        list.sort((a, b) -> a[1] - b[1]);
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        int pos = 0;
+        int cap = w;
+        int count = 0;
+        while (count < k) {
+            while (pos < list.size() && list.get(pos)[1] <= cap) {
+                pq.offer(list.get(pos)[0]);
+                pos++;
+            }
+            if (pq.isEmpty()) {
+                break;
+            }
+            cap += pq.poll();
+            count++;
+        }
+        return cap;
+    }
+
+}
+
+or
+
 import java.util.*;
 
 class Solution {
