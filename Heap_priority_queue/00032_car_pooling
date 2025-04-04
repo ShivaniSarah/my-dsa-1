@@ -12,6 +12,54 @@ Output: false
 
 # java
 
+class Pair{
+    int loc;
+    int dir;
+    int p;
+    Pair(int loc,
+    int dir,
+    int p){
+        this.loc = loc;
+        this.dir = dir;
+        this.p = p;
+    }
+}
+class Solution {
+    public boolean carPooling(int[][] trips, int capacity) {
+        Arrays.sort(trips, (x,y)-> x[1] -y[1] );
+        int n = trips.length;
+        int currCap = 0; //trips[0][0];
+        
+        PriorityQueue<Pair> pq = new PriorityQueue<>( (x,y)-> {
+            if(x.loc ==y.loc) return x.dir - y.dir;
+            return x.loc - y.loc;
+        } );
+        for(int i =0; i<n;i++){
+            pq.add(new Pair(trips[i][1],1,trips[i][0]));
+            pq.add(new Pair(trips[i][2],-1,trips[i][0]));
+        }
+
+        while(!pq.isEmpty()){
+            Pair pr = pq.poll();
+            if(pr.dir ==1 && currCap + pr.p > capacity){
+                return false;
+            }
+            
+            else if(pr.dir == -1){
+                currCap -= pr.p;
+            }
+            else if(pr.dir == 1){
+                currCap += pr.p;
+            }
+        }
+
+        return true;
+
+    }
+}
+
+or
+
 class Solution {
     public boolean carPooling(int[][] trips, int capacity) {
 	
