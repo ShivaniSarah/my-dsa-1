@@ -328,6 +328,16 @@ computeIfAbsent()
 .values()
 Map.Entry<Integer,Character> e : mp.entrySet()
 
+Deque<Integer> q = new ArrayDeque<>();
+q.offerLast(0);
+q.offerFirst(i);
+q.peekLast()
+q.peekFirst() 
+q.pollLast();
+q.pollFirst();
+           
+
+int[] dp = Arrays.copyOf(nums, nums.length);
 
 print array by this:
 
