@@ -17,30 +17,72 @@ For each person, we return the number of flowers in full bloom during their arri
 class Solution {
     public int[] fullBloomFlowers(int[][] flowers, int[] people) 
     {
+
+        Arrays.sort(flowers, (x,y)-> x[0]- y[0]);
+
         int n = people.length;
-        // for sorting and handle problem.
+        int m = flowers.length;
+
+        int ans[] = new int[n];
+        PriorityQueue<int[]> pq = new PriorityQueue<>((x,y)-> x[1]-y[1]);
+        
+        int[][] pp = new int[n][2];
+        for(int i=0; i<n;i++){
+            pp[i][0] = people[i];
+            pp[i][1] = i;
+        }
+        Arrays.sort(pp,(x,y)-> x[0]-y[0]);
+        int l = 0;
+        for(int i =0; i<n;i++){
+
+            int t = pp[i][0];
+            int index = pp[i][1];
+
+            while( l<m &&  flowers[l][0]<=t   ){
+                pq.add(flowers[l]);
+                l++;
+            }
+            while( !pq.isEmpty() &&  pq.peek()[1]< t ){
+                pq.poll();
+            } 
+           
+            ans[index]= pq.size();
+
+        }
+
+        return ans;
+    }
+}
+
+or
+
+class Solution {
+    public int[] fullBloomFlowers(int[][] flowers, int[] people) 
+    {
+        int n = people.length;
+        
         int[] nums = Arrays.copyOf(people, n);
         Arrays.sort(nums);
         Arrays.sort(flowers, (a, b) -> a[0] - b[0]);
-        // save the end blooming time of currently blooming flowers
+        
         PriorityQueue<Integer> list = new PriorityQueue<>();
-        // HashMap<people[] value, how many flowers blooming>
+        
         HashMap<Integer, Integer> map = new HashMap<>();
         
         int index = 0;
         for (int i = 0; i < n; i++)
         {
-            // first poll() all the flowers finished blooming
+            
             while (list.size() > 0 && list.peek() < nums[i])
                 list.poll();
-            // add all the flowers started blooming
+            
             while (index < flowers.length && flowers[index][0] <= nums[i])
             {
                 if (flowers[index][1] >= nums[i])
                     list.offer(flowers[index][1]);
                 index++;
             }
-            // record its relationship with array people[]
+            
             map.put(nums[i], list.size());
         }    
 
