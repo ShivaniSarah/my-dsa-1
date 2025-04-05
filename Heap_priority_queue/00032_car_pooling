@@ -63,12 +63,9 @@ or
 class Solution {
     public boolean carPooling(int[][] trips, int capacity) {
 	
-		// Sorting the Array by Pick up Position of Passengers
+		
         Arrays.sort(trips, (a,b) -> Integer.compare(a[1], b[1]));
         
-		
-		// Using Min Heap to Store All Passengers and 
-		// Passenger with Minimum Drop Location at Top of Heap
         PriorityQueue<int[]> pq = 
             new PriorityQueue<>(trips.length, (a,b) -> Integer.compare(a[2], b[2]));
         
@@ -76,17 +73,15 @@ class Solution {
         int pos = 0; // to keep track of location/position of cab throughout the trip
 		
         for(int i =0; i < trips.length; i++){
-            pos = trips[i][1]; // updating the position after reaching a passenger crowd
-            pq.add(trips[i]); // adding passengers to queue
+            pos = trips[i][1];
+            pq.add(trips[i]);
             
-			// now keep on removing passengers until 
-			// we remove all whose drop location is less than current location of Cab
-			while(pq.peek()[2] <= pos){
+	   while(pq.peek()[2] <= pos){
                 sum = sum-pq.poll()[0];
             }
 			
-			// Basic check if all passengers from a given stop can aquire seat in the Cab or not
-            if(trips[i][0] > capacity - sum){
+            if(trips[i][0] > capacity - sum)
+            {
                 return false;
             }else{
                 sum += trips[i][0];
