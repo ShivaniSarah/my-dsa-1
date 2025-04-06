@@ -122,6 +122,90 @@ class Solution {
 
 or
 
+
+class Solution {
+    public int mostBooked(int n, int[][] meetings) {
+        Arrays.sort(meetings, (a, b) -> a[0] - b[0]);
+        PriorityQueue<long[]> queue = new PriorityQueue<>(
+                (a, b) -> a[0] == b[0] ? (int) (a[1] - b[1]) : (int) (a[0] - b[0]));
+        // {endTime, room}
+
+        int[] roomCount = new int[n]; // number of meeting of the room
+        int result = 0;
+
+        for (int i = 0; i < n; i++)
+            queue.add(new long[] { 0, i });
+
+        for (int[] item : meetings) {
+            int time = item[0]; // new meeting start time
+
+            while (queue.peek()[0] < time) // order all available room by room index
+                queue.add(new long[] { time, queue.poll()[1] });
+
+            long[] current = queue.poll();
+            int curRoom = (int) current[1];
+            long meetingEndTime = current[0] + (item[1] - item[0]); // current room endTime + this meeting time
+            roomCount[curRoom]++;
+
+            if (roomCount[curRoom] > roomCount[result]) // update result
+                result = curRoom;
+            else if (roomCount[curRoom] == roomCount[result])
+                result = Math.min(result, curRoom);
+
+            queue.add(new long[] { meetingEndTime, curRoom });
+        }
+
+        return result;
+    }
+}
+
+or
+
+class Solution {
+    public int mostBooked(int n, int[][] meetings) {
+        Arrays.sort(meetings, (a, b) -> a[0] - b[0]);
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a,b)-> (a[1] == b[1]) ? a[0] - b[0] : a[1] - b[1]);
+        PriorityQueue<Integer> freeroom = new PriorityQueue<>();
+
+        for(int i = 0;i < n;i++){
+            freeroom.offer(i);
+        }
+
+        int[] res = new int[n];
+
+        for(int i = 0;i < meetings.length;i++){
+            while(!pq.isEmpty() && pq.peek()[1] <= meetings[i][0]){
+                freeroom.offer(pq.poll()[0]);
+            }
+
+            if(freeroom.isEmpty()){
+                int[] room = pq.poll();
+                res[room[0]]++;
+                pq.offer(new int[]{room[0], room[1] + meetings[i][1] - meetings[i][0]});
+            }
+            else{
+                int room = freeroom.poll();
+                res[room]++;
+                pq.offer(new int[]{room,meetings[i][1]});
+            }
+        }
+
+        int mx = Integer.MIN_VALUE , ans = 0;
+
+        for(int i = 0;i < n;i++){
+            if(res[i] > mx){
+                mx = res[i];
+                ans = i;
+            }
+        }
+
+        return ans;
+    }
+}
+
+or
+
 class Solution {
 
   public int mostBooked(int n, int[][] meetings) {
