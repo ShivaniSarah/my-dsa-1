@@ -258,3 +258,107 @@ class Solution {
       return maxInd;
   }
 }
+
+or
+
+class Solution {
+    public int mostBooked(int n, int[][] meetings) {
+        long[] roomAvailabilityTime = new long[n];
+        int[] meetingCount = new int[n];
+        Arrays.sort(meetings, (a, b) -> Integer.compare(a[0], b[0]));
+
+        for (int[] meeting : meetings) {
+            int start = meeting[0], end = meeting[1];
+            long minRoomAvailabilityTime = Long.MAX_VALUE;
+            int minAvailableTimeRoom = 0;
+            boolean foundUnusedRoom = false;
+
+            for (int i = 0; i < n; i++) {
+                if (roomAvailabilityTime[i] <= start) {
+                    foundUnusedRoom = true;
+                    meetingCount[i]++;
+                    roomAvailabilityTime[i] = end;
+                    break;
+                }
+
+                if (minRoomAvailabilityTime > roomAvailabilityTime[i]) {
+                    minRoomAvailabilityTime = roomAvailabilityTime[i];
+                    minAvailableTimeRoom = i;
+                }
+            }
+
+            if (!foundUnusedRoom) {
+                roomAvailabilityTime[minAvailableTimeRoom] += end - start;
+                meetingCount[minAvailableTimeRoom]++;
+            }
+        }
+
+        int maxMeetingCount = 0, maxMeetingCountRoom = 0;
+        for (int i = 0; i < n; i++) {
+            if (meetingCount[i] > maxMeetingCount) {
+                maxMeetingCount = meetingCount[i];
+                maxMeetingCountRoom = i;
+            }
+        }
+
+        return maxMeetingCountRoom;
+    }
+}
+
+
+or
+
+
+class Solution {
+    public int mostBooked(int n, int[][] meetings) {
+        int[] meetingCount = new int[n];
+
+        PriorityQueue<long[]> usedRooms = new PriorityQueue<>(new Comparator<long[]>() {
+            public int compare(long[] a, long[] b) {
+                return a[0] != b[0] ? Long.compare(a[0], b[0]) : Long.compare(a[1], b[1]);
+            }
+        });
+
+        PriorityQueue<Integer> unusedRooms = new PriorityQueue<>();
+        for (int i = 0; i < n; i++) {
+            unusedRooms.offer(i);
+        }
+
+        Arrays.sort(meetings, new Comparator<int[]>() {
+            public int compare(int[] a, int[] b) {
+                return a[0] != b[0] ? Integer.compare(a[0], b[0]) : Integer.compare(a[1], b[1]);
+            }
+        });
+
+        for (int[] meeting : meetings) {
+            int start = meeting[0], end = meeting[1];
+
+            while (!usedRooms.isEmpty() && usedRooms.peek()[0] <= start) {
+                int room = (int) usedRooms.poll()[1];
+                unusedRooms.offer(room);
+            }
+
+            if (!unusedRooms.isEmpty()) {
+                int room = unusedRooms.poll();
+                usedRooms.offer(new long[]{end, room});
+                meetingCount[room]++;
+            } else {
+                long roomAvailable = usedRooms.peek()[0];
+                int room = (int) usedRooms.poll()[1];
+                usedRooms.offer(new long[]{roomAvailable + end - start, room});
+                meetingCount[room]++;
+            }
+        }
+
+        int maxCount = 0, resultRoom = 0;
+        for (int i = 0; i < n; i++) {
+            if (meetingCount[i] > maxCount) {
+                maxCount = meetingCount[i];
+                resultRoom = i;
+            }
+        }
+
+        return resultRoom;
+    }
+}
+
