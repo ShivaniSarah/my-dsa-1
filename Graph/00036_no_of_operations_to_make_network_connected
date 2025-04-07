@@ -114,6 +114,16 @@ class Solution {
     }
 }
 
+// Initialization: O(n)
+//For each edge:
+//findUPar() with path compression: O(α(n))
+//unionBySize() or unionByRank(): O(α(n))
+//Processing m edges: O(m · α(n))
+// Component counting loop: O(n)
+//✅ Total: O(n + m · α(n)) ≈ O(n + m) (since α(n) ≤ 5)
+// SC: O(n)
+
+
 or
 
 
@@ -159,3 +169,51 @@ class Solution {
 }
 
 // TC: O(n + m)
+// SC: O(n + m)
+
+Why DSU is the Better Choice for Interviews:
+Reason	DSU Advantage
+Scalability	DSU handles large sparse graphs better.
+Time Complexity	Still O(n + m) but faster in practice.
+Optimal for Components Counting	Clean, elegant way to track connected components.
+Demonstrates Mastery	Shows you know advanced data structures (bonus points!).
+Avoids Stack Overflow	No recursion, so safer for deep graphs.
+
+
+Term	Meaning	Growth Rate
+O(log n)	Logarithmic	Slow
+O(√n)	Square root	Slower
+O(α(n))	Inverse Ackermann	Extremely slow 
+
+✅ Why does it show up in DSU?
+When using:
+
+Path Compression in find
+
+Union by Rank or Union by Size`
+
+The amortized time complexity per operation is:
+
+O(α(n))
+
+Which means:
+
+n operations take about O(n · α(n)) ≈ O(n) time in practice.
+
+✅ Inverse Ackermann Function (α(n))
+α(n) is the inverse of that function.
+
+It answers: “How many times do we need to apply the inverse Ackermann function to reduce n to a small constant?”
+
+🔸 In practice, α(n) ≤ 5 for all reasonable n (n ≤ 2^65536)
+
+So, for any real-world size input — even billions —
+
+✅ O(α(n)) behaves like constant time.
+
+
+Feature	DFS-Based	DSU-Based
+Time Complexity	O(n + m)	O(n + m) (with α(n) factor)
+Space Complexity	O(n + m)	O(n)
+Practical Speed	Slower for sparse graphs	Faster due to constant-time unions
+Implementation Ease	Simpler	Slightly more complex
