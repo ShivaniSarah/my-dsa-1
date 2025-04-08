@@ -1,5 +1,7 @@
 # my-dsa-coding-concept-collection-1
 
+This repo is for Basic Concepts spanning Easy, Medium and Hard problems
+
  Formally, the next element of nums[i] is nums[(i + 1) % n] and the previous element of nums[i] is nums[(i - 1 + n) % n].
 
 fill arrays-> 00048_blank
