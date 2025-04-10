@@ -19,7 +19,7 @@ import java.io.*;
 import java.util.*;
 class DisjointSet {
     List<Integer> rank = new ArrayList<>();    // level or height of the node in level order traversal
-    List<Integer> parent = new ArrayList<>();  //  ultimate parent
+    List<Integer> parent = new ArrayList<>();  //  contains immendiate parent also but when findUPar is called ultimate parent is stored.
     List<Integer> size = new ArrayList<>();    // no of total child nodes this node has
 
 
@@ -45,9 +45,9 @@ class DisjointSet {
         int ulp_v = findUPar(v);
         if (ulp_u == ulp_v) return;
         if (rank.get(ulp_u) < rank.get(ulp_v)) {
-            parent.set(ulp_u, ulp_v);
+            parent.set(ulp_u, ulp_v); // connect both parents of u and v
         } else if (rank.get(ulp_v) < rank.get(ulp_u)) {
-            parent.set(ulp_v, ulp_u); 
+            parent.set(ulp_v, ulp_u); // connect both parents of u and v
         } else {
             parent.set(ulp_v, ulp_u);
             int rankU = rank.get(ulp_u);
