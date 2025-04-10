@@ -36,7 +36,7 @@ class DisjointSet {
             return node;
         }
         int ulp = findUPar(parent.get(node));
-        parent.set(node, ulp);  // index, value
+        parent.set(node, ulp);  // index, value => node , parent
         return parent.get(node);
     }
 
