@@ -139,8 +139,8 @@ class Solution {
                 }
                 mx = Math.max(mx, sizeTotal + 1);
             }
-        }
-        for (int cellNo = 0; cellNo < n * n; cellNo++) {
+        } // here we got mx as considering the 0 to 1 conversion in for each zero and then counting max island out of all.
+        for (int cellNo = 0; cellNo < n * n; cellNo++) {   // tell max out of already existing islands component without considering 0 to 1 conversion
             mx = Math.max(mx, ds.size.get(ds.findUPar(cellNo)));
         }
         return mx;
