@@ -304,7 +304,7 @@ TreeSet<Integer> set = new TreeSet<>();
 
 int min = set.first();
 int max = set.last();
-
+set.pollFirst()
 Integer secondSmallest = set.higher(set.first()); // Element just greater than the smallest
 Integer secondLargest = set.lower(set.last()); // Element just smaller than the largest
 
