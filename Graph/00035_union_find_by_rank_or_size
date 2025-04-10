@@ -18,10 +18,12 @@ Union By Rank and Union By Size:
 import java.io.*;
 import java.util.*;
 class DisjointSet {
-    List<Integer> rank = new ArrayList<>();
-    List<Integer> parent = new ArrayList<>();
-    List<Integer> size = new ArrayList<>();
-    public DisjointSet(int n) {
+    List<Integer> rank = new ArrayList<>();    // level of the node in level order traversal
+    List<Integer> parent = new ArrayList<>();  //  ultimate parent
+    List<Integer> size = new ArrayList<>();    // no of total child nodes this node has
+
+
+    public DisjointSet(int n) { // constructor initializes each of n nodes as independent disconnected component
         for (int i = 0; i <= n; i++) {
             rank.add(0);
             parent.add(i);
