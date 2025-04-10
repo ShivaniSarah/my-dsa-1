@@ -18,7 +18,7 @@ Union By Rank and Union By Size:
 import java.io.*;
 import java.util.*;
 class DisjointSet {
-    List<Integer> rank = new ArrayList<>();    // level of the node in level order traversal
+    List<Integer> rank = new ArrayList<>();    // level or height of the node in level order traversal
     List<Integer> parent = new ArrayList<>();  //  ultimate parent
     List<Integer> size = new ArrayList<>();    // no of total child nodes this node has
 
