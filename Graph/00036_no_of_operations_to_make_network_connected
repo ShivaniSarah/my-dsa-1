@@ -106,7 +106,7 @@ class Solution {
         }
         int cntC = 0;
         for (int i = 0; i < n; i++) {
-            if (ds.parent.get(i) == i) cntC++;
+            if (ds.parent.get(i) == i) cntC++; // count no of root nodes or no of connected components
         }
         int ans = cntC - 1;
         if (cntExtras >= ans) return ans;
