@@ -36,7 +36,7 @@ class DisjointSet {
             return node;
         }
         int ulp = findUPar(parent.get(node));
-        parent.set(node, ulp);
+        parent.set(node, ulp);  // index, value
         return parent.get(node);
     }
 
@@ -47,7 +47,7 @@ class DisjointSet {
         if (rank.get(ulp_u) < rank.get(ulp_v)) {
             parent.set(ulp_u, ulp_v);
         } else if (rank.get(ulp_v) < rank.get(ulp_u)) {
-            parent.set(ulp_v, ulp_u);
+            parent.set(ulp_v, ulp_u); 
         } else {
             parent.set(ulp_v, ulp_u);
             int rankU = rank.get(ulp_u);
