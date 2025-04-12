@@ -32,7 +32,7 @@ class Solution {
         int n = p.length();
         
         // Create a DP table with dimensions (m+1) x (n+1)
-        boolean[][] dp = new boolean[m + 1][n + 1];
+        boolean[][] dp = new boolean[m + 1][n + 1]; // by default false will be there
         
         // Base case: empty string matches empty pattern
         dp[0][0] = true;
