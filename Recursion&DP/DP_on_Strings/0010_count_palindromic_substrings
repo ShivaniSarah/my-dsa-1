@@ -1,7 +1,8 @@
 Count Palindromic Subsequences
 https://www.geeksforgeeks.org/problems/count-palindromic-subsequences/1
 
-Given a string str of length N, you have to find number of palindromic subsequence (need not necessarily be distinct) present in the string str.
+Given a string str of length N, you have to find number of palindromic subsequence (need not necessarily be distinct)
+present in the string str.
 Note: You have to return the answer module 109+7;
 
 Example 1:
