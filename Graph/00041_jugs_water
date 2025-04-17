@@ -286,3 +286,98 @@ class GfG {
         System.out.println(minSteps(m, n, d));
     }
 }
+
+
+
+# for n jugs
+
+https://leetcode.com/discuss/post/4773975/google-by-anonymous_user-29dv/
+
+import java.util.*;
+
+class Solution {
+    public List<List<Integer>> findSolution(List<Integer> jugs, int k) {
+        int n = jugs.size();
+        List<Integer> curState = new ArrayList<>(Collections.nCopies(n, 0));
+        List<List<Integer>> solution = new ArrayList<>();
+        Set<String> vis = new HashSet<>();
+
+        if (findSolutionUtil(jugs, k, curState, solution, vis)) {
+            System.out.println("found");
+            Collections.reverse(solution);
+            return solution;
+        }
+
+        System.out.println("no solution found");
+        return new ArrayList<>();
+    }
+
+    private boolean findSolutionUtil(List<Integer> jugs, int k, List<Integer> curState,
+                                     List<List<Integer>> solution, Set<String> vis) {
+        String state = getState(curState);
+        if (vis.contains(state)) return false;
+        vis.add(state);
+
+        int total = 0;
+        for (int val : curState) total += val;
+
+        if (total == k) {
+            solution.add(new ArrayList<>(curState));
+            return true;
+        }
+
+        for (int i = 0; i < curState.size(); i++) {
+            int tmp = curState.get(i);
+
+            // Empty
+            curState.set(i, 0);
+            if (findSolutionUtil(jugs, k, curState, solution, vis)) {
+                curState.set(i, tmp);
+                solution.add(new ArrayList<>(curState));
+                return true;
+            }
+
+            // Fill
+            curState.set(i, jugs.get(i));
+            if (findSolutionUtil(jugs, k, curState, solution, vis)) {
+                curState.set(i, tmp);
+                solution.add(new ArrayList<>(curState));
+                return true;
+            }
+
+            // Transfer
+            curState.set(i, tmp);
+            for (int j = 0; j < curState.size(); j++) {
+                if (i == j) continue;
+
+                int tmp2 = curState.get(j);
+                int rem = jugs.get(j) - curState.get(j);
+
+                if (rem >= curState.get(i)) {
+                    curState.set(j, curState.get(j) + curState.get(i));
+                    curState.set(i, 0);
+                } else {
+                    curState.set(j, jugs.get(j));
+                    curState.set(i, curState.get(i) - rem);
+                }
+
+                if (findSolutionUtil(jugs, k, curState, solution, vis)) {
+                    curState.set(i, tmp);
+                    curState.set(j, tmp2);
+                    solution.add(new ArrayList<>(curState));
+                    return true;
+                }
+
+                curState.set(i, tmp);
+                curState.set(j, tmp2);
+            }
+        }
+
+        return false;
+    }
+
+    private String getState(List<Integer> state) {
+        return state.toString(); // e.g., "[0, 3, 0]"
+    }
+}
+
