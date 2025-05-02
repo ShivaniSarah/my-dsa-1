@@ -1,0 +1,147 @@
+18. Competitive Gaming
+
+ALL
+
+A group of friends is playing a video game where players earn points. At the end of a round, players who achieve at least rank k can "level up" their characters. Given the scores of players at the end of the round, determine how many players will level up.
+
+Notes:
+
+11
+
+Players with equal scores share the same rank, and the next player with a lower score takes the subsequent rank position. For instance, if four players finish with scores ranking them as 1, 1, 1, and 4, the first three players tie for first place, and the next player is ranked fourth.
+
+12
+
+No player with a score of O can level up, regardless of rank.
+
+13
+
+Example
+
+k-3
+
+4
+
+scores [100, 50, 50, 25)
+
+5
+
+These players' ranks are [1, 2, 2, 4). Because the players need to have a rank of at least k = 3to level up, only the first three players qualify. Therefore, the answer is 3.
+
+6
+
+Function Description
+
+Complete the function numPlayers in the editor with the following parameters:
+
+int k: the cutoff rank to level up a player's character
+
+int scores[n]: the players' scores
+
+Returns
+
+int: the number of players who can level up after this round
+
+
+Constraints
+
+1sns 105
+
+0s scores[ifs 100
+
+ksn
+
+Input Format For Custom Testing
+
+Sample Case 0
+
+Sample Input
+
+STDIN
+
+4
+
+5
+
+20
+
+40
+
+60
+
+80
+
+100
+
+Function
+
+k=4
+
+scores[] size n = 5
+
+scores [20, 40, 60, 80, 100]
+
+D
+
+1
+
+2
+
+3
+
+Sample Output
+
+4
+
+Explanation
+
+The players achieve the ranks [5, 4, 3, 2, 1] in order. Since the cutoff, k, is rank 2 4, there are 4 players who can level up.
+
+
+Int numPlayers ( int k, list <integer>scores)
+
+
+
+
+# jvaa
+
+
+import java.util.*;
+
+public class CompetitiveGaming {
+    public static int numPlayers(int k, List<Integer> scores) {
+        Collections.sort(scores, Collections.reverseOrder());
+
+        int count = 0;        // players who level up
+        int rank = 1;         // current rank
+        int prevScore = -1;   // to track score changes
+
+        for (int i = 0; i < scores.size(); i++) {
+            int score = scores.get(i);
+            if (score == 0) break;  // zero score can't level up
+
+            if (score != prevScore) {
+                rank = count + 1;  // update rank when score drops
+            }
+
+            if (rank > k) break;
+
+            count++;
+            prevScore = score;
+        }
+
+        return count;
+    }
+
+    // Example for manual test
+    public static void main(String[] args) {
+        List<Integer> scores = new ArrayList<>();
+        // Add scores as needed
+        int k = 832;
+        // Example with zero and duplicates
+        scores.addAll(Arrays.asList(0, 100, 100, 90, 90, 90, 80, 70, 0));
+        System.out.println(numPlayers(k, scores));
+    }
+}
+
+
