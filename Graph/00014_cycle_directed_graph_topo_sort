@@ -1,0 +1,204 @@
+
+
+
+boolean isCycle() 
+        {
+ 
+            // Create a vector to store indegrees of all
+            // vertices. Initialize all indegrees as 0.
+            int[] in_degree = new int[this.V];
+            Arrays.fill(in_degree, 0);
+ 
+            // Traverse adjacency lists to fill indegrees of
+            // vertices. This step takes O(V+E) time
+            for (int u = 0; u < V; u++)
+            {
+                for (int v : adj[u])
+                    in_degree[v]++;
+            }
+ 
+            // Create an queue and enqueue all vertices with
+            // indegree 0
+            Queue<Integer> q = new LinkedList<Integer>();
+            for (int i = 0; i < V; i++)
+                if (in_degree[i] == 0)
+                    q.add(i);
+ 
+            // Initialize count of visited vertices
+            int cnt = 0;
+ 
+            // Create a vector to store result (A topological
+            // ordering of the vertices)
+            Vector<Integer> top_order = new Vector<>();
+ 
+            // One by one dequeue vertices from queue and enqueue
+            // adjacents if indegree of adjacent becomes 0
+            while (!q.isEmpty())
+            {
+ 
+                // Extract front of queue (or perform dequeue)
+                // and add it to topological order
+                int u = q.poll();
+                top_order.add(u);
+ 
+                // Iterate through all its neighbouring nodes
+                // of dequeued node u and decrease their in-degree
+                // by 1
+                for (int itr : adj[u])
+                    if (--in_degree[itr] == 0)
+                        q.add(itr);
+                cnt++;
+            }
+ 
+            // Check if there was a cycle
+            if (cnt != this.V)
+                return true;
+            else
+                return false;
+        }
+
+
+or
+
+dfs
+
+https://www.geeksforgeeks.org/detect-cycle-in-directed-graph-using-topological-sort/
+
+
+
+// Java program to implement 
+// the above approach 
+import java.util.*;
+
+class GFG{
+	
+static int t, n, m, a;
+
+// Stack to store the
+// visited vertices in
+// the Topological Sort
+static Stack<Integer> s;
+
+// Store Topological Order
+static ArrayList<Integer> tsort;
+
+// Adjacency list to store edges
+static ArrayList<ArrayList<Integer>> adj;
+
+// To ensure visited vertex
+static int[] visited = new int[(int)1e5 + 1];
+
+// Function to perform DFS
+static void dfs(int u)
+{
+	
+	// Set the vertex as visited
+	visited[u] = 1;
+
+	for(Integer it : adj.get(u))
+	{
+		
+		// Visit connected vertices
+		if (visited[it] == 0)
+			dfs(it);
+	}
+	
+	// Push into the stack on
+	// complete visit of vertex
+	s.push(u);
+}
+
+// Function to check and return
+// if a cycle exists or not
+static boolean check_cycle()
+{
+	
+	// Stores the position of
+	// vertex in topological order
+	Map<Integer, Integer> pos = new HashMap<>();
+	
+	int ind = 0;
+	
+	// Pop all elements from stack
+	while (!s.isEmpty()) 
+	{
+		pos.put(s.peek(), ind);
+		
+		// Push element to get
+		// Topological Order
+		tsort.add(s.peek());
+
+		ind += 1;
+		
+		// Pop from the stack
+		s.pop();
+	}
+
+	for(int i = 0; i < n; i++) 
+	{
+		for(Integer it : adj.get(i))
+		{
+			
+			// If parent vertex
+			// does not appear first
+			if (pos.get(i) > pos.get(it))
+			{
+				
+				// Cycle exists
+				return true;
+			}
+		}
+	}
+
+	// Return false if cycle
+	// does not exist
+	return false;
+}
+
+// Function to add edges
+// from u to v
+static void addEdge(int u, int v)
+{
+	adj.get(u).add(v);
+}
+
+// Driver code 
+public static void main (String[] args)
+{
+	n = 4; m = 5;
+	
+	s = new Stack<>();
+	adj = new ArrayList<>();
+	tsort = new ArrayList<>();
+	
+	for(int i = 0; i < 4; i++)
+		adj.add(new ArrayList<>());
+		
+	// Insert edges
+	addEdge(0, 1);
+	addEdge(0, 2);
+	addEdge(1, 2);
+	addEdge(2, 0);
+	addEdge(2, 3);
+	
+	for(int i = 0; i < n; i++)
+	{
+		if (visited[i] == 0) 
+		{
+			dfs(i);
+		}
+	}
+	
+	// If cycle exist
+	if (check_cycle())
+	System.out.println("Yes");
+	else
+	System.out.println("No");
+}
+}
+
+// This code is contributed by offbeat
+
+
+
+
