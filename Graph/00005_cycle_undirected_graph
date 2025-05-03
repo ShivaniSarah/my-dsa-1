@@ -1,5 +1,7 @@
 https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
 
+https://www.geeksforgeeks.org/detect-cycle-undirected-graph/
+
 Given an undirected graph with V vertices labelled from 0 to V-1 and E edges, check whether it contains any cycle or not. 
 Graph is in the form of adjacency list where adj[i] contains all the nodes ith node is having edge with.
 
@@ -145,6 +147,9 @@ class Solution {
                     return true; 
             }
             // if adjacent node is visited and is not its own parent node
+            // If an adjacent vertex is visited and
+            // is not parent of current vertex,
+            // then there exists a cycle in the graph.
             else if(adjacentNode != parent) return true; 
         }
         return false; 
