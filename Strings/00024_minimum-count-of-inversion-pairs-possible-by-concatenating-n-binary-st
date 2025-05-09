@@ -1,0 +1,120 @@
+https://www.geeksforgeeks.org/minimum-count-of-inversion-pairs-possible-by-concatenating-n-binary-strings-in-any-order/
+
+
+Given N strings in the form of array str, each of length M and containing only characters ‘a‘ and ‘b‘. The task is to find the count of minimum number of Inversion Pairs possible in the resultant strings formed by concatenating all N strings in any order, without changing the order of any individual string.
+
+
+An Inversion Pair in a string S is a pair of indices (i,j) such that i<j and Si = ‘b’, Sj = ‘a’. 
+
+
+For example, the string S= “abababbbb” contains 3 inversions : (2,3), (2,5), (4,5).
+
+
+Examples:
+
+
+Input: N = 3 , M = 2, str = {“ba” , “aa” , “ab”}
+Output: 2
+Explanation: If we concatenate the strings in order s2 + s1 + s3 = “aabaab” , then the inversion pair will be at (3, 4) and (3 , 5)
+ 
+
+
+Input: N = 2 , M = 2, str = {“b” , “b”}
+Output: 0
+
+
+
+
+
+# java
+
+
+/*package whatever //do not write package name here */
+import java.io.*;
+import java.util.*;
+
+class GFG {
+
+// Function to find the inversion pairs
+public static int findInversion(List<String> arr, int N,
+								int M)
+{
+	String res = "";
+
+	// Concatenate the strings
+	for (int i = 0; i < N; i++) {
+	res = res + arr.get(i);
+	}
+
+	// Count number of 'b'
+	int cnt = 0;
+
+	// Count the total number of
+	// inversion pairs in the entire
+	int inversionPairs = 0;
+
+	// N*M = new size of the concatenated string
+	for (int i = 0; i < N * M; i++) {
+	// If the current character is 'b'
+	// then increase the count of cnt
+	if (res.charAt(i) == 'b') {
+
+		cnt += 1;
+		continue;
+	}
+	// Add the cnt because that number of
+	// pairs can be formed to that 'a'
+	else {
+		inversionPairs = inversionPairs + cnt;
+	}
+	}
+	return inversionPairs;
+}
+
+public static void main(String[] args)
+{
+	int N = 3, M = 2;
+	List<String> arr = new ArrayList<String>();
+	arr.add("ba");
+	arr.add("aa");
+	arr.add("ab");
+
+	// Calling sort with Comparator function to sort the
+	// vectors of strings
+	Collections.sort(arr, new Comparator<String>() {
+	@Override
+	public int compare(final String s1, String s2)
+	{
+		int cnts1 = 0;
+		for (int i = 0; i < s1.length(); i++) {
+		if ('b' == s1.charAt(i)) {
+			cnts1++;
+		}
+		}
+
+		int cnts2 = 0;
+		for (int i = 0; i < s2.length(); i++) {
+		if ('b' == s2.charAt(i)) {
+			cnts2++;
+		}
+		}
+		int ans = -1;
+		if (cnts1 > cnts2)
+		ans = 1;
+		return ans;
+	}
+	});
+
+	// Calling the function and passing the sorted array
+	// in it
+	int ans = findInversion(arr, N, M);
+
+	// Printing the answer
+	System.out.println(ans);
+}
+}
+
+// This code is contributed by akashish__
+
+
+
