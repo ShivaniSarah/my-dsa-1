@@ -1,0 +1,225 @@
+https://leetcode.com/problems/word-break-ii/description/
+
+
+140. Word Break II
+Solved
+Hard
+Topics
+Companies
+Given a string s and a dictionary of strings wordDict, add spaces in s to construct a sentence where each word is a valid dictionary word. Return all such possible sentences in any order.
+
+Note that the same word in the dictionary may be reused multiple times in the segmentation.
+
+ 
+
+Example 1:
+
+Input: s = "catsanddog", wordDict = ["cat","cats","and","sand","dog"]
+Output: ["cats and dog","cat sand dog"]
+Example 2:
+
+Input: s = "pineapplepenapple", wordDict = ["apple","pen","applepen","pine","pineapple"]
+Output: ["pine apple pen apple","pineapple pen apple","pine applepen apple"]
+Explanation: Note that you are allowed to reuse a dictionary word.
+Example 3:
+
+Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+Output: []
+ 
+
+Constraints:
+
+1 <= s.length <= 20
+1 <= wordDict.length <= 1000
+1 <= wordDict[i].length <= 10
+s and wordDict[i] consist of only lowercase English letters.
+All the strings of wordDict are unique.
+Input is generated in a way that the length of the answer doesn't exceed 105.
+
+
+# java
+
+
+
+class TrieNode {
+
+    boolean isEnd;
+    TrieNode[] children;
+
+    TrieNode() {
+        isEnd = false;
+        children = new TrieNode[26];
+    }
+}
+
+class Trie {
+
+    TrieNode root;
+
+    Trie() {
+        root = new TrieNode();
+    }
+
+    void insert(String word) {
+        TrieNode node = root;
+        for (char c : word.toCharArray()) {
+            int index = c - 'a';
+            if (node.children[index] == null) {
+                node.children[index] = new TrieNode();
+            }
+            node = node.children[index];
+        }
+        node.isEnd = true;
+    }
+}
+
+class Solution {
+
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        // Build the Trie from the word dictionary
+        Trie trie = new Trie();
+        for (String word : wordDict) {
+            trie.insert(word);
+        }
+
+        // Map to store results of subproblems
+        Map<Integer, List<String>> dp = new HashMap<>();
+
+        // Iterate from the end of the string to the beginning
+        for (int startIdx = s.length(); startIdx >= 0; startIdx--) {
+            // List to store valid sentences starting from startIdx
+            List<String> validSentences = new ArrayList<>();
+
+            // Initialize current node to the root of the trie
+            TrieNode currentNode = trie.root;
+
+            // Iterate from startIdx to the end of the string
+            for (int endIdx = startIdx; endIdx < s.length(); endIdx++) {
+                char c = s.charAt(endIdx);
+                int index = c - 'a';
+
+                // Check if the current character exists in the trie
+                if (currentNode.children[index] == null) {
+                    break;
+                }
+
+                // Move to the next node in the trie
+                currentNode = currentNode.children[index];
+
+                // Check if we have found a valid word
+                if (currentNode.isEnd) {
+                    String currentWord = s.substring(startIdx, endIdx + 1);
+
+                    // If it's the last word, add it as a valid sentence
+                    if (endIdx == s.length() - 1) {
+                        validSentences.add(currentWord);
+                    } else {
+                        // If it's not the last word, append it to each sentence formed by the remaining substring
+                        List<String> sentencesFromNextIndex = dp.get(
+                            endIdx + 1
+                        );
+                        for (String sentence : sentencesFromNextIndex) {
+                            validSentences.add(currentWord + " " + sentence);
+                        }
+                    }
+                }
+            }
+
+            // Store the valid sentences in dp
+            dp.put(startIdx, validSentences);
+        }
+
+        // Return the sentences formed from the entire string
+        return dp.getOrDefault(0, new ArrayList<>());
+    }
+}
+
+
+or
+
+
+
+class Solution {
+
+    int[] exists;
+    Trie root;
+    
+    public void search(List<String> ans, Trie curr, StringBuilder temp, char[] given, int index){
+        if(index==given.length){
+            return;
+        } 
+        if(curr.children[given[index]-'a'] == null)return;
+        
+        Trie next = curr.children[given[index] - 'a'];
+        temp.append(given[index]);
+        
+        //If the word is present in the dictionary, we can either add a space or we continue going down in the trie
+        if(next.isWord){
+            //If we have reached the end of the string, add the value to Answer and terminate
+            if(index+1 == given.length){
+                ans.add(temp.toString());
+                temp.deleteCharAt(temp.length()-1); 
+                return;
+                }
+            else{
+                //We are adding space
+                temp.append(" ");
+                //Since after adding space, the next letter should be the beginning of a new word from the dictionary, we pass in the ROOT trie node
+                search(ans, root, temp, given, index+1);
+                //remove the space we added in the above line.
+                temp.deleteCharAt(temp.length()-1);      
+            }
+        }
+        
+        //since we have not added a space, we are technically going down in the same trie block. So we are moving the NEXT node in the CURR trie node.
+        search(ans, next, temp, given, index+1);
+            
+        //Deleting the added character
+        temp.deleteCharAt(temp.length()-1);            
+
+    }
+    
+    
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        root = new Trie();
+        exists = new int[26];
+        List<String> ans = new ArrayList();
+        for(String word : wordDict){
+            root.addWord(word);
+        }
+        
+        for(char c : s.toCharArray()){
+            if(exists[c-'a']!=1)
+                return new ArrayList();
+        }
+        search(ans, root, new StringBuilder(), s.toCharArray(), 0);
+        return ans;
+    }
+
+    
+    class Trie{
+        boolean isWord;
+        Trie[] children;
+        Trie(){
+            isWord=false;
+            children = new Trie[26];
+        }
+        public void addWord(String w){
+            Trie curr = this;
+            int index = 0;
+            char[] word = w.toCharArray();
+            while(index<word.length){   
+                exists[word[index]-'a']=1;
+                if(curr.children[word[index]-'a'] == null){
+                    curr.children[word[index]-'a'] = new Trie();
+                }  
+                curr = curr.children[word[index]-'a'];
+                index++;
+            }
+            curr.isWord = true;
+        }
+        
+    }
+}
+
+
