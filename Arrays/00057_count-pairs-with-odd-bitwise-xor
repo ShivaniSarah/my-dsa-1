@@ -1,0 +1,76 @@
+https://www.geeksforgeeks.org/count-pairs-with-odd-bitwise-xor-that-can-be-removed-and-replaced-by-their-bitwise-or/
+
+
+Given an array arr[] consisting of N integers, the task is to count the number of pairs whose Bitwise XOR is odd, that can be removed and replaced by their Bitwise OR values until no such pair exists in the array.
+
+Examples:
+
+
+Input: arr[] = {5, 4, 7, 2}
+Output: 2
+Explanation:
+Pair (5, 4): Bitwise XOR of 5 and 4 is 1. Remove this pair and add their Bitwise OR (= 5) into the array. Therefore, the modified array is {5, 7, 2}.
+Pair (5, 2): Bitwise XOR of 5 and 2 is 7. Remove this pair and add their Bitwise OR (= 7) into the array. Therefore, the modified array is {7, 7}.
+
+
+Therefore, the count of such pairs that can be removed is 2.
+
+
+Input: arr[] = {2, 4, 6}
+Output: 0
+
+
+# jaav
+
+
+
+// Java program for the above approach
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+class GFG{
+
+// Function to count the number of pairs
+// required to be removed from the array
+// and replaced by their Bitwise OR values
+static void countPairs(int arr[], int N)
+{
+	
+	// Stores the count of
+	// even array elements
+	int even = 0;
+
+	// Traverse the given array
+	for(int i = 0; i < N; i++)
+	{
+		
+		// Increment the count
+		// of even array elements
+		if (arr[i] % 2 == 0)
+			even++;
+	}
+
+	// If the array contains at
+	// least one odd array element
+	if (N - even >= 1)
+	{
+		System.out.println(even);
+		return;
+	}
+
+	// Otherwise, print 0
+	System.out.println(0);
+}
+
+// Driver Code
+public static void main(String[] args)
+{
+	int arr[] = { 5, 4, 7, 2 };
+	int N = arr.length;
+
+	countPairs(arr, N);
+}
+}
+
+// This code is contributed by Kingash
