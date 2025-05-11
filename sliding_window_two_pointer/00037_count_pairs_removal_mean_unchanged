@@ -1,5 +1,100 @@
 https://www.geeksforgeeks.org/count-of-pairs-that-can-be-removed-from-array-without-changing-the-mean/
 
+
+// Java program to remove a number from the
+// array without changing its arithmetic mean
+// Java code to implement the approach
+import java.io.*;
+import java.util.*;
+
+class GFG
+{
+
+// Function to calculate the number
+// of pairs of positions [i, j] (i<j),
+// such that on deletion of elements
+// at these positions, the mean of
+// remaining (n-2) elements does not change
+public static int countPairs(int n, int A[])
+{
+
+	// Calculating sum of array
+	int sum = 0;
+	for (int i = 0; i < n; i++) {
+	sum += A[i];
+	}
+
+	// Calculating mean of array
+	double mean = (sum * 1.0) / n;
+
+	// Required sum = twice of mean
+	double required_sum = 2.0 * mean;
+
+	// Checking if required_sum is integral
+	int check = (int)required_sum;
+	double temp = required_sum - check;
+
+	if (temp > 0) {
+	return 0;
+	}
+	else {
+
+	// Initialising count variable to
+	// store total number of valid pairs
+	int count = 0;
+
+	// Declaring a map to calculate
+	// number of pairs with required sum
+	HashMap<Integer, Integer> mp
+		= new HashMap<Integer, Integer>();
+
+	// Standard procedure to calculate
+	// total number of pairs
+	// of required sum
+	for (int i = 0; i < n; i++) {
+		if (i > 0) {
+		if (mp.get((int)required_sum - A[i]) != null)
+		{
+			count += mp.get((int)required_sum - A[i]);
+		}
+
+		}
+		if (mp.get(A[i]) != null)
+		{
+		mp.put(A[i],mp.get(A[i])+1);
+		}
+		else
+		{
+		mp.put(A[i],1);
+		}
+	}
+
+	// Returning count
+	return count;
+	}
+
+}
+
+public static void main(String[] args)
+{
+	int N = 5;
+	int arr[] = { 1, 4, 7, 3, 5 };
+	int numberOfPairs = countPairs(N, arr);
+	System.out.print(numberOfPairs);
+}
+}
+
+// This code is contributed by Pushpesh Raj
+
+
+TC: O(n)
+
+
+or
+
+
+
+
 // Java program to remove a number from the
 // array without changing its arithmetic mean
 // Java code to implement the approach
@@ -84,3 +179,8 @@ public static void main(String[] args)
 }
 
 // This code is contributed by Pushpesh Raj
+
+
+TC : O(nlogn)
+
+// can also do sorting and two pointers
