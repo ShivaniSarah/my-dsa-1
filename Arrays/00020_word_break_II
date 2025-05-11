@@ -89,6 +89,7 @@ Time complexity: O(n⋅2^ n )
 
 The algorithm explores all possible ways to break the string into words. In the worst case, where each character can be treated as a word, the recursion tree has 2 n
   leaf nodes, resulting in an exponential time complexity. For each leaf node, O(n) work is performed, so the overall complexity is O(n⋅2 n ).
+n times is for the substring operation
 
 Space complexity: O(2^ n)
 
