@@ -303,6 +303,8 @@ hashMap implemented by hashtable and linked list to avoid collision => later tre
 use TreeSet or TreeMap when  you need to access min and max both simultaneously and add element that adds in ordered format.
 Dont use min heap or max heap at this time
 
+insertion deletion in treeset / treemap is O(logn)
+
 TreeSet<Integer> set = new TreeSet<>();
 
 int min = set.first();
