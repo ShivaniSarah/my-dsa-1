@@ -98,6 +98,7 @@ The recursion stack can grow up to a depth of n, where each recursive call consu
 Since each position in the string can be a split point or not, and for n positions, there are 2 n
   possible combinations of splits. Thus, in the worst case, each combination generates a different sentence that needs to be stored, leading to exponential space complexity.
 
+this is for the result space for 2^n resulting sentences.
 
 
 
