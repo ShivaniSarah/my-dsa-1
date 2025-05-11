@@ -48,7 +48,7 @@ lintcode
 https://github.com/doocs/leetcode/blob/main/solution/0300-0399/0301.Remove%20Invalid%20Parentheses/Solution.java
 
 Think :
-
+n is size of single input or test case
 If n ≤ 12, the time complexity can be O(n!).
 If n ≤ 25, the time complexity can be O(2^n).
 If n ≤ 100, the time complexity can be O(n^4).
