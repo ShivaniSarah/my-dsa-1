@@ -100,6 +100,64 @@ or
 
 // better
 
+class Solution {
+    public List<String> findWords(char[][] board, String[] words) {
+        int r = board.length;
+        int c = board[0].length;
+        Set<String> result = new HashSet<>();
+        Set<String> wordSet = new HashSet<>(Arrays.asList(words));
+        Set<String> prefixSet = new HashSet<>();
+
+        // Build a prefix set for early pruning
+        for (String word : words) {
+            for (int i = 1; i <= word.length(); i++) {
+                prefixSet.add(word.substring(0, i));
+            }
+        }
+
+        boolean[][] visited = new boolean[r][c];
+        
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                dfs(board, i, j, "", visited, wordSet, prefixSet, result);
+            }
+        }
+        return new ArrayList<>(result);
+    }
+
+    private void dfs(char[][] board, int i, int j, String current, boolean[][] visited,
+                     Set<String> wordSet, Set<String> prefixSet, Set<String> result) {
+        if (i < 0 || j < 0 || i >= board.length || j >= board[0].length || visited[i][j])
+            return;
+
+        current += board[i][j];
+
+        // Prune if no word starts with current
+        if (!prefixSet.contains(current))
+            return;
+
+        if (wordSet.contains(current)) {
+            result.add(current);
+            // Don't return here; continue DFS to avoid missing longer overlapping words
+        }
+
+        visited[i][j] = true;
+
+        dfs(board, i + 1, j, current, visited, wordSet, prefixSet, result);
+        dfs(board, i - 1, j, current, visited, wordSet, prefixSet, result);
+        dfs(board, i, j + 1, current, visited, wordSet, prefixSet, result);
+        dfs(board, i, j - 1, current, visited, wordSet, prefixSet, result);
+
+        visited[i][j] = false; // Backtrack
+    }
+}
+
+
+
+or
+
+
+// brute
 
 class Solution {
     public List<String> findWords(char[][] board, String[] words) {
