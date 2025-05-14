@@ -295,6 +295,7 @@ Integer[] arr = {1, 4, 6, 54}; // Use Integer[] instead of int[]
 List<Integer> categories = Arrays.asList(arr);
 int[] arr2 = {1, 4, 6, 54};
 
+----------------------------------------------------------------------------------------------------
 
 hashSet is implemented by hashMap
 
@@ -303,7 +304,7 @@ hashMap implemented by hashtable and linked list to avoid collision => later tre
 use TreeSet or TreeMap when  you need to access min and max both simultaneously and add element that adds in ordered format.
 Dont use min heap or max heap at this time
 
-insertion deletion in treeset / treemap is O(logn)
+insertion deletion in treeset / treemap / heap / priority queue  is O(logn)
 
 TreeSet<Integer> set = new TreeSet<>();
 
@@ -347,12 +348,16 @@ q.peekFirst()
 q.pollLast();
 q.pollFirst();
            
+------------------------------------------
 
 int[] dp = Arrays.copyOf(nums, nums.length);
 
 print array by this:
 
 System.out.println(Arrays.deepToString(pair));
+
+
+--------------------------------------------
 
 or override toString method of Pair class
 
@@ -369,3 +374,24 @@ class Pair{
         return this.p+" "+this.c;
     }
 }
+
+
+
+
+---------------
+
+
+class Main {
+    public static void main(String[] args) {
+        String s ="hell";
+        String t = new String("o");
+        String m = s+t;
+        System.out.println(m);
+    }
+}
+
+concatenation creates a new String object , String object is immutable
+
+---------------
+
+
