@@ -324,6 +324,14 @@ TreeMap<Integer, String> map = new TreeMap<>();
 int minKey = map.firstKey();
 int maxKey = map.lastKey();
 
+| Method          | Returns                                    |
+| --------------- | ------------------------------------------ |
+| `lowerKey(k)`   | Greatest key **strictly less than** `k`    |
+| `floorKey(k)`   | Greatest key **less than or equal to** `k` |
+| `higherKey(k)`  | Least key **strictly greater than** `k`    |
+| `ceilingKey(k)` | Least key **greater than or equal to** `k` |
+
+
 Integer secondSmallestKey = map.higherKey(map.firstKey());
 Integer secondLargestKey = map.lowerKey(map.lastKey()); // Key just smaller than the largest key
 
