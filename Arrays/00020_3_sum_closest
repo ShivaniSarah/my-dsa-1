@@ -1,5 +1,6 @@
-return 3 integers having sum closest to target , positive negative and zero allowed and duplicates allowed give code in 
-java please return 3 integers
+return 3 integers having sum closest to target , positive negative and zero allowed and duplicates allowed give code in java
+
+A. please return 3 integers
 
 
 import java.util.*;
@@ -44,3 +45,59 @@ public class ThreeSumClosest {
 
 
 
+B. get all unique triplets
+
+
+
+import java.util.*;
+
+public class AllClosestTriplets {
+    public static List<List<Integer>> allClosestTriplets(int[] nums, int target) {
+        Arrays.sort(nums);
+        int closestDiff = Integer.MAX_VALUE;
+        Set<List<Integer>> resultSet = new HashSet<>();
+
+        for (int i = 0; i < nums.length - 2; i++) {
+            // Skip duplicates for i
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            int left = i + 1, right = nums.length - 1;
+
+            while (left < right) {
+                int sum = nums[i] + nums[left] + nums[right];
+                int diff = Math.abs(sum - target);
+
+                if (diff < closestDiff) {
+                    closestDiff = diff;
+                    resultSet.clear(); // Found better, reset
+                    resultSet.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                } else if (diff == closestDiff) {
+                    resultSet.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                }
+
+                if (sum < target) {
+                    left++;
+                } else if (sum > target) {
+                    right--;
+                } else {
+                    // Move both pointers to avoid duplicate triplets
+                    left++;
+                    right--;
+                    while (left < right && nums[left] == nums[left - 1]) left++;
+                    while (left < right && nums[right] == nums[right + 1]) right--;
+                }
+            }
+        }
+
+        return new ArrayList<>(resultSet);
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {-1, 2, 1, -4, 2, 1};
+        int target = 1;
+        List<List<Integer>> triplets = allClosestTriplets(nums, target);
+        for (List<Integer> triplet : triplets) {
+            System.out.println(triplet);
+        }
+    }
+}
