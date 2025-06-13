@@ -1,0 +1,134 @@
+
+Here's a fully optimized and clean implementation of the IntervalManager class in Java that supports:
+
+addInterval(int start, int end): Adds an interval and merges overlapping ones.
+
+removeInterval(int start, int end): Removes an interval (may split intervals).
+
+queryInterval(int start, int end): Checks if the given interval is fully covered.
+
+This uses a TreeMap<Integer, Integer> to manage intervals, where key = interval start, value = interval end.
+
+
+
+# java
+
+
+
+import java.util.*;
+
+public class IntervalManager {
+    private final TreeMap<Integer, Integer> intervals = new TreeMap<>();
+
+    public void addInterval(int start, int end) {
+        if (start >= end) return;
+
+        Integer prev = intervals.floorKey(start);
+        if (prev != null && intervals.get(prev) >= start) {
+            start = prev;
+            end = Math.max(end, intervals.get(prev));
+            intervals.remove(prev);
+        }
+
+        Integer next = intervals.ceilingKey(start);
+        while (next != null && next <= end) {
+            end = Math.max(end, intervals.get(next));
+            intervals.remove(next);
+            next = intervals.ceilingKey(start);
+        }
+
+        intervals.put(start, end);
+    }
+
+    public void removeInterval(int start, int end) {
+        if (start >= end) return;
+
+        Integer prev = intervals.floorKey(start);
+        if (prev != null && intervals.get(prev) > start) {
+            int prevEnd = intervals.get(prev);
+            if (prev < start) intervals.put(prev, start);
+            else intervals.remove(prev);
+            if (prevEnd > end) intervals.put(end, prevEnd);
+        }
+
+        Integer next = intervals.ceilingKey(start);
+        while (next != null && next < end) {
+            int nextEnd = intervals.get(next);
+            intervals.remove(next);
+            if (nextEnd > end) intervals.put(end, nextEnd);
+            next = intervals.ceilingKey(start);
+        }
+    }
+
+    public boolean queryInterval(int start, int end) {
+        if (start >= end) return false;
+
+        Integer prev = intervals.floorKey(start);
+        return prev != null && intervals.get(prev) >= end;
+    }
+}
+
+
+
+or
+
+
+
+
+
+
+
+
+
+import java.util.*;
+
+public class IntervalManager {
+    private final TreeMap<Integer, Integer> intervals = new TreeMap<>();
+
+    public void addInterval(int start, int end) {
+        if (start >= end) return;
+
+        Integer left = intervals.floorKey(start);
+        if (left != null && intervals.get(left) >= start) {
+            start = left;
+            end = Math.max(end, intervals.get(left));
+            intervals.remove(left);
+        }
+
+        Map.Entry<Integer, Integer> entry = intervals.ceilingEntry(start);
+        while (entry != null && entry.getKey() <= end) {
+            end = Math.max(end, entry.getValue());
+            intervals.remove(entry.getKey());
+            entry = intervals.ceilingEntry(start);
+        }
+
+        intervals.put(start, end);
+    }
+
+    public void removeInterval(int start, int end) {
+        if (start >= end) return;
+
+        Integer left = intervals.floorKey(start);
+        if (left != null && intervals.get(left) > start) {
+            int lEnd = intervals.get(left);
+            if (left < start) intervals.put(left, start);
+            else intervals.remove(left);
+            if (lEnd > end) intervals.put(end, lEnd);
+        }
+
+        Map.Entry<Integer, Integer> entry = intervals.ceilingEntry(start);
+        while (entry != null && entry.getKey() < end) {
+            int eStart = entry.getKey(), eEnd = entry.getValue();
+            intervals.remove(eStart);
+            if (eEnd > end) intervals.put(end, eEnd);
+            entry = intervals.ceilingEntry(start);
+        }
+    }
+
+    public boolean queryInterval(int start, int end) {
+        if (start >= end) return false;
+
+        Integer left = intervals.floorKey(start);
+        return left != null && intervals.get(left) >= end;
+    }
+}
