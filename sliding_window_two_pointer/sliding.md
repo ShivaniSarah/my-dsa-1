@@ -4,4 +4,4 @@ prefix count approach
 
 if count of all subarrays <= k
 
-res += r-l+1
+res += right - left + 1
