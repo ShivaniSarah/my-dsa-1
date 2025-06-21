@@ -35,3 +35,21 @@ res += right - left + 1
             
             result += right - left + 1;
         }
+
+
+
+
+# if count of all subarrays >= k
+
+
+https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/
+
+
+        for (int right = 0; right < s.length(); right++) {
+            count[s.charAt(right) - 'a']++;
+            while (count[0] > 0 && count[1] > 0 && count[2] > 0) {
+                count[s.charAt(left) - 'a']--;
+                left++;
+            }
+            total += left;
+        }
