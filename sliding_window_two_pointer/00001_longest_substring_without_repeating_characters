@@ -18,27 +18,30 @@ Output: 3
 Explanation: The answer is "wke", with the length of 3.
 Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
-# brute
+
+# optimal
 
 class Solution {
-    public int lengthOfLongestSubstring(String str) {
-        if (str.length() == 0)
-            return 0;
-        int maxans = 0; // Initialize maxans to 0 instead of Integer.MIN_VALUE
-        for (int i = 0; i < str.length(); i++) {
-            Set<Character> se = new HashSet<>();
-            for (int j = i; j < str.length(); j++) {
-                if (se.contains(str.charAt(j))) {
-                    maxans = Math.max(maxans, j - i);
-                    break;
-                }
-                se.add(str.charAt(j));
-            }
-            maxans = Math.max(maxans, se.size()); // Update maxans for cases without duplicates
+    public int lengthOfLongestSubstring(String s) {
+        HashMap < Character, Integer > mpp = new HashMap < Character, Integer > ();
+
+        int left = 0, right = 0;
+        int n = s.length();
+        int len = 0;
+        while (right < n) {
+            if (mpp.containsKey(s.charAt(right))) left = Math.max(mpp.get(s.charAt(right)) + 1, left);
+
+            mpp.put(s.charAt(right), right);
+
+            len = Math.max(len, right - left + 1);
+            right++;
         }
-        return maxans;
+        return len;
     }
 }
+
+
+
 
 # better
 
@@ -65,23 +68,25 @@ class Solution {
     }
 }
 
-# optimal
+
+# brute
 
 class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        HashMap < Character, Integer > mpp = new HashMap < Character, Integer > ();
-
-        int left = 0, right = 0;
-        int n = s.length();
-        int len = 0;
-        while (right < n) {
-            if (mpp.containsKey(s.charAt(right))) left = Math.max(mpp.get(s.charAt(right)) + 1, left);
-
-            mpp.put(s.charAt(right), right);
-
-            len = Math.max(len, right - left + 1);
-            right++;
+    public int lengthOfLongestSubstring(String str) {
+        if (str.length() == 0)
+            return 0;
+        int maxans = 0; // Initialize maxans to 0 instead of Integer.MIN_VALUE
+        for (int i = 0; i < str.length(); i++) {
+            Set<Character> se = new HashSet<>();
+            for (int j = i; j < str.length(); j++) {
+                if (se.contains(str.charAt(j))) {
+                    maxans = Math.max(maxans, j - i);
+                    break;
+                }
+                se.add(str.charAt(j));
+            }
+            maxans = Math.max(maxans, se.size()); // Update maxans for cases without duplicates
         }
-        return len;
+        return maxans;
     }
 }
