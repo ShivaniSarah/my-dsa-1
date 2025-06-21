@@ -1,6 +1,8 @@
-if count of subarrays == k
+# if count of subarrays == k
 
 prefix count approach
+
+https://leetcode.com/problems/binary-subarrays-with-sum/description/
 
  for (int num : nums) {
             sum += num;
@@ -12,6 +14,8 @@ prefix count approach
 
 
 
-if count of all subarrays <= k
+# if count of all subarrays <= k
+
+
 
 res += right - left + 1
