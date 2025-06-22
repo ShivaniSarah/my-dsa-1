@@ -121,3 +121,47 @@ class Solution {
         return minLength == Integer.MAX_VALUE ? "" : s.substring(minLeft, minLeft + minLength);
     }
 }
+
+
+or
+
+
+
+class Solution {
+    public String minWindow(String s, String t) {
+        if (s.length() == 0 || t.length() == 0 || s.length() < t.length()) {
+            return "";
+        }
+        int begin = 0, end = 0;
+        int minBegin = Integer.MAX_VALUE, minEnd = 0, minLength = Integer.MAX_VALUE;
+        int[] arr = new int[128];
+        int[] window = new int[128];
+        for (int i = 0; i < t.length(); i++) {
+            arr[t.charAt(i)]++;
+        }
+        while (end < s.length()) {
+            window[s.charAt(end)]++;
+            while (allCharPresent(arr, window)) {
+                if (end - begin + 1 < minLength) {
+                    minBegin = begin;
+                    minEnd = end;
+                    minLength = minEnd - minBegin + 1;
+                }
+                window[s.charAt(begin)]--;
+                begin++;
+            }
+            end++;
+        }
+        return minLength == Integer.MAX_VALUE ? "" : s.substring(minBegin, minBegin + minLength);
+    }
+
+    private boolean allCharPresent(int[] arr, int[] window) {
+        for (int i = 0; i < 128; i++) {
+            if (arr[i] > window[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
