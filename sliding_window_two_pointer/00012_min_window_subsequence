@@ -11,7 +11,8 @@ str2: eksrg
 Output: 
 eksforg
 Explanation: 
-"eksforg" satisfies all required conditions. str2 is its subsequence and it is longest and leftmost among all possible valid substrings of str1.
+"eksforg" satisfies all required conditions. str2 is its subsequence and it is longest and leftmost among all
+possible valid substrings of str1.
 
 Example 2:
 Input: 
