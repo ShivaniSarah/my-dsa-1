@@ -59,3 +59,42 @@ class Solution {
     }
 
 }
+
+
+or
+
+
+// my sol
+
+
+class Solution {
+    static String minWindow(String s1, String s2) {
+        int n = s1.length();
+        int m = s2.length();
+        int i =0, j =0;
+        int formed=0, required = m ;
+        int minLength = Integer.MAX_VALUE;
+        int left =0, minLeft =0;
+
+        while( i<n && j<m ){
+            if(s1.charAt(i)== s2.charAt(j)){
+                formed++;
+                j++;
+                if( formed == required ){
+                    if(i- left +1< minLength){
+                        minLength = i- left +1;
+                        minLeft  = left;
+                    }
+                    j=0;
+                    left++;
+                    i=left-1;
+                    formed=0;
+                }
+            } 
+            i++;
+        }
+        return minLength == Integer.MAX_VALUE ? "":  s1.substring(minLeft,minLeft+minLength);
+    }
+}
+
+
