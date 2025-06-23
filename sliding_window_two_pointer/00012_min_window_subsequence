@@ -1,7 +1,8 @@
 https://www.geeksforgeeks.org/problems/minimum-window-subsequence/0
 
 Given strings str1 and str2, find the minimum (contiguous) substring W of str1, so that str2 is a subsequence of W.
-If there is no such window in str1 that covers all characters in str2, return the empty string "". If there are multiple such minimum-length windows, return the one with the left-most starting index.
+If there is no such window in str1 that covers all characters in str2, return the empty string "". If there are multiple such
+minimum-length windows, return the one with the left-most starting index.
 
 Example 1:
 Input: 
