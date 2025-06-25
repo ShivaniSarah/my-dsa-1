@@ -21,29 +21,39 @@ Explanation: No subarray contains the element 4 at least 3 times.
 
 class Solution {
     public long countSubarrays(int[] nums, int k) {
-        int maxi = 0, i = 0, j = 0, n = nums.length;
-
-        HashMap<Integer, Integer> map = new HashMap<>();
-
-        long ans = 0;
-
-        for (int el : nums) 
-            maxi = Math.max(maxi, el);
-
-        while (j < nums.length) {
-            if (nums[j] == maxi) 
-                map.put(nums[j], map.getOrDefault(nums[j], 0) + 1);
-            while (map.getOrDefault(maxi, 0) >= k) {
-                ans += (n - j);
-                if (nums[i] == maxi) 
-                    map.put(nums[i], map.get(nums[i]) - 1);
-                i++;
-            }
-            j++;
+        int n = nums.length;
+        
+        // Step 1: Find the maximum element in the array
+        int max = Integer.MIN_VALUE;
+        for (int num : nums) {
+            max = Math.max(max, num);
         }
-        return ans;
+
+        // Step 2: Sliding window approach
+        int start = 0, end = 0, maxFreq = 0;
+        long count = 0;
+
+        while (end < n) {
+            if (nums[end] == max) {
+                maxFreq++;
+            }
+
+            while (maxFreq >= k) {
+                // All subarrays starting from `start` and ending at `end` to `n-1` are valid
+                count += (n - end);
+                if (nums[start] == max) {
+                    maxFreq--;
+                }
+                start++;
+            }
+
+            end++;
+        }
+
+        return count;
     }
 }
+
 
 or
 
@@ -73,3 +83,39 @@ class Solution {
       return count;
     }
 }   
+
+
+
+
+or
+
+
+class Solution {
+    public long countSubarrays(int[] nums, int k) {
+        int maxi = 0, i = 0, j = 0, n = nums.length;
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        long ans = 0;
+
+        for (int el : nums) 
+            maxi = Math.max(maxi, el);
+
+        while (j < nums.length) {
+            if (nums[j] == maxi) 
+                map.put(nums[j], map.getOrDefault(nums[j], 0) + 1);
+            while (map.getOrDefault(maxi, 0) >= k) {
+                ans += (n - j);
+                if (nums[i] == maxi) 
+                    map.put(nums[i], map.get(nums[i]) - 1);
+                i++;
+            }
+            j++;
+        }
+        return ans;
+    }
+}
+
+
+
+
