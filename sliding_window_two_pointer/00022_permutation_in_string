@@ -16,6 +16,7 @@ Output: false
 
 # java
 
+# the below 3 solutions are same please look at all 3
 
 // Time	O(n + m*26) where n = s2.length() and m = s1.length()
 // Space	O(1) → only two int[26] arrays used
@@ -124,6 +125,7 @@ class Solution {
 }
 
 
+--------------------------
 or
 
 class Solution {
