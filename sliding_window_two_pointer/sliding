@@ -12,6 +12,12 @@ https://leetcode.com/problems/binary-subarrays-with-sum/description/
             prefixSumCount.put(sum, prefixSumCount.getOrDefault(sum, 0) + 1);
         }
 
+or
+
+
+https://leetcode.com/problems/subarrays-with-k-different-integers/description/
+
+
 
 
 # if count of all subarrays <= k
