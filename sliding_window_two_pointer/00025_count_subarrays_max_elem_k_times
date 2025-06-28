@@ -22,6 +22,37 @@ Explanation: No subarray contains the element 4 at least 3 times.
 
 class Solution {
     public long countSubarrays(int[] nums, int k) {
+        long count = 0;
+        long total = 0;
+        int left = 0;
+
+        int n = nums.length;
+        
+        int max = Integer.MIN_VALUE;
+        for (int num : nums) {
+            max = Math.max(max, num);
+        }
+
+        for (int right = 0; right < n; right++) {
+            if (nums[right] == max) count++;
+
+            while (count >= k) {
+                if (nums[left] == max) count--;
+                left++;
+            }
+
+            total += left;
+        }
+
+        return total;
+    }
+}
+
+or
+
+
+class Solution {
+    public long countSubarrays(int[] nums, int k) {
         int n = nums.length;
         
         // Step 1: Find the maximum element in the array
