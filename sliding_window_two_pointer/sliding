@@ -41,6 +41,7 @@ res += right - left + 1
 
 # if count of all subarrays >= k
 
+total += left;   or   count += (n - end);
 
 https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/
 
@@ -61,3 +62,19 @@ or
 https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/description/
 
 
+ while (end < n) {
+            if (nums[end] == max) {
+                maxFreq++;
+            }
+
+            while (maxFreq >= k) {
+                // All subarrays starting from `start` and ending at `end` to `n-1` are valid
+                count += (n - end);
+                if (nums[start] == max) {
+                    maxFreq--;
+                }
+                start++;
+            }
+
+            end++;
+        }
