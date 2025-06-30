@@ -1,5 +1,7 @@
 https://leetcode.com/problems/binary-tree-postorder-traversal/
 
+LRN (Left-Right-Node)
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
