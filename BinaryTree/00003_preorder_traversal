@@ -1,5 +1,7 @@
 https://leetcode.com/problems/binary-tree-preorder-traversal/
 
+NLR (Node-Left-Right)
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
