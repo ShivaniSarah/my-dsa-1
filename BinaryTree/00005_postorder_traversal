@@ -45,6 +45,40 @@ class Solution {
 
 or
 
+// using one stack
+
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+          List<Integer> result = new ArrayList<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
+        TreeNode curr = root, lastVisited = null;
+
+        while (curr != null || !stack.isEmpty()) {
+            if (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            } else {
+                TreeNode peekNode = stack.peek();
+
+                // If right child exists and not visited yet, go right
+                if (peekNode.right != null && lastVisited != peekNode.right) {
+                    curr = peekNode.right;
+                } else {
+                    // Visit node
+                    result.add(peekNode.val);
+                    lastVisited = stack.pop();
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
+or
+
+// using two stacks
+
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
          // List to store postorder traversal
