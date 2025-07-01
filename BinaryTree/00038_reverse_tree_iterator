@@ -112,3 +112,38 @@ class ReversePostorderIterator implements TreeIterator {
 
 
 
+// using two stacks
+
+
+import java.util.*;
+
+class ReversePostorderIterator implements Iterator<Integer> {
+    private Stack<Integer> output = new Stack<>();
+
+    public ReversePostorderIterator(TreeNode root) {
+        if (root == null) return;
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            output.push(node.val); // Node is visited first
+
+            // Push left first, then right (so right is processed before left)
+            if (node.left != null) stack.push(node.left);
+            if (node.right != null) stack.push(node.right);
+        }
+    }
+
+    @Override
+    public boolean hasNext() {
+        return !output.isEmpty();
+    }
+
+    @Override
+    public Integer next() {
+        return output.pop();
+    }
+}
+
