@@ -179,36 +179,6 @@ class TreeNode {
 
 public class ReverseTraversals {
 
-    // Reverse Inorder: Right → Node → Left
-    public static void reverseInorder(TreeNode root) {
-        Stack<TreeNode> stack = new Stack<>();
-        TreeNode current = root;
-
-        while (current != null || !stack.isEmpty()) {
-            while (current != null) {
-                stack.push(current);
-                current = current.right;
-            }
-            current = stack.pop();
-            System.out.print(current.val + " ");
-            current = current.left;
-        }
-    }
-
-    // Reverse Preorder: Node → Right → Left
-    public static void reversePreorder(TreeNode root) {
-        if (root == null) return;
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            System.out.print(node.val + " ");
-            if (node.left != null) stack.push(node.left);
-            if (node.right != null) stack.push(node.right);
-        }
-    }
-
     // Reverse Postorder: Right → Left → Node
     public static void reversePostorder(TreeNode root) {
         if (root == null) return;
