@@ -188,45 +188,42 @@ class PostorderIterator implements Iterator<Integer> {
 
 or
 
-// fully lazy => occupy less space
-
+// fully lazy and using 2 stacks => occupy less space 
 
 
 import java.util.*;
 
 class PostorderIterator implements Iterator<Integer> {
-    private Stack<TreeNode> stack = new Stack<>();
-    private TreeNode current;
-    private TreeNode lastVisited = null;
+    private Stack<TreeNode> stack1 = new Stack<>();
+    private Stack<TreeNode> stack2 = new Stack<>();
 
     public PostorderIterator(TreeNode root) {
-        current = root;
+        if (root != null) stack1.push(root);
     }
 
     @Override
     public boolean hasNext() {
-        return current != null || !stack.isEmpty();
+        fillStack2();
+        return !stack2.isEmpty();
     }
 
     @Override
     public Integer next() {
         if (!hasNext()) throw new NoSuchElementException();
+        return stack2.pop().val;
+    }
 
-        while (current != null) {
-            stack.push(current);
-            current = current.left;
+    private void fillStack2() {
+        while (!stack2.isEmpty()) return;  // already ready
+
+        while (!stack1.isEmpty()) {
+            TreeNode node = stack1.pop();
+            stack2.push(node);
+
+            // We reverse the standard push order here:
+            if (node.left != null) stack1.push(node.left);
+            if (node.right != null) stack1.push(node.right);
         }
-
-        TreeNode peek = stack.peek();
-
-        if (peek.right != null && lastVisited != peek.right) {
-            current = peek.right;
-            return next(); // recursive call to handle right subtree first
-        }
-
-        stack.pop();
-        lastVisited = peek;
-        return peek.val;
     }
 }
 
