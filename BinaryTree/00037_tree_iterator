@@ -148,9 +148,42 @@ public class Main {
 }
 
 
-using two stack => complete iterative
+
+// using two stack => complete iterative
 
 
 
+import java.util.*;
+
+class PostorderIterator implements Iterator<Integer> {
+    private Stack<Integer> output = new Stack<>();
+
+    public PostorderIterator(TreeNode root) {
+        if (root == null) return;
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            output.push(node.val); // Collect values in reverse postorder
+
+            if (node.left != null) stack.push(node.left);
+            if (node.right != null) stack.push(node.right);
+        }
+        // Now output has reverse postorder → reversing it gives correct postorder
+        Collections.reverse(output);
+    }
+
+    @Override
+    public boolean hasNext() {
+        return !output.isEmpty();
+    }
+
+    @Override
+    public Integer next() {
+        return output.pop();
+    }
+}
 
 
