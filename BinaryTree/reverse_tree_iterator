@@ -1,0 +1,114 @@
+Sure! Let's cover the reverse versions of the 3 classic traversals (inorder, preorder, postorder), each using one stack, and in a simple, easy-to-understand form.
+
+🌿 Tree Traversals and Their Reverse Forms
+
+
+| Traversal | Normal Order        | Reverse Order           |
+| --------- | ------------------- | ----------------------- |
+| Inorder   | Left → Node → Right | **Right → Node → Left** |
+| Preorder  | Node → Left → Right | **Node → Right → Left** |
+| Postorder | Left → Right → Node | **Right → Left → Node** |
+
+
+Now let’s implement reverse versions using one stack.
+
+
+✅ 1. Reverse Inorder Iterator (Right → Node → Left)
+
+
+class ReverseInorderIterator implements TreeIterator {
+    private Stack<TreeNode> stack = new Stack<>();
+    private TreeNode current;
+
+    public ReverseInorderIterator(TreeNode root) {
+        current = root;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return current != null || !stack.isEmpty();
+    }
+
+    @Override
+    public Integer next() {
+        while (current != null) {
+            stack.push(current);
+            current = current.right;  // go right first
+        }
+
+        TreeNode node = stack.pop();
+        current = node.left;  // then go left
+        return node.val;
+    }
+}
+
+
+✅ 2. Reverse Preorder Iterator (Node → Right → Left)
+
+
+class ReversePreorderIterator implements TreeIterator {
+    private Stack<TreeNode> stack = new Stack<>();
+
+    public ReversePreorderIterator(TreeNode root) {
+        if (root != null) stack.push(root);
+    }
+
+    @Override
+    public boolean hasNext() {
+        return !stack.isEmpty();
+    }
+
+    @Override
+    public Integer next() {
+        TreeNode node = stack.pop();
+
+        // Push left after right so that left is processed last
+        if (node.left != null) stack.push(node.left);
+        if (node.right != null) stack.push(node.right);
+
+        return node.val;
+    }
+}
+
+
+
+✅ 3. Reverse Postorder Iterator (Right → Left → Node)
+This is the reverse of the true postorder: you’ll simulate it and reverse the output if needed — but if you want to generate the reverse postorder directly, you can simulate it like so:
+
+
+class ReversePostorderIterator implements TreeIterator {
+    private Stack<TreeNode> stack = new Stack<>();
+    private TreeNode lastVisited = null;
+    private TreeNode current;
+
+    public ReversePostorderIterator(TreeNode root) {
+        current = root;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return current != null || !stack.isEmpty();
+    }
+
+    @Override
+    public Integer next() {
+        while (current != null) {
+            stack.push(current);
+            current = current.right;  // go right first
+        }
+
+        TreeNode peekNode = stack.peek();
+
+        if (peekNode.left != null && lastVisited != peekNode.left) {
+            current = peekNode.left;
+            return next();
+        }
+
+        stack.pop();
+        lastVisited = peekNode;
+        return peekNode.val;
+    }
+}
+
+
+
