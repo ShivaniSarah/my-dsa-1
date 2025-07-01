@@ -1,10 +1,12 @@
-reverse Inorder traversal  R N L
-reverse preorder traversal  R L N
-reverse postorder traversal  N R L
+ Inorder traversal  L N R
+ preorder traversal  N L R
+ postorder traversal  L R N
 
-reverse Inorder traversal  L N R
-reverse preorder traversal  L R N
-reverse postorder traversal  N L R
+reverse Inorder traversal  R N L
+reverse preorder traversal  N R L
+reverse postorder traversal  R L N
+
+
 
 we need (inorder and preorder) or (inorder and postorder) to construct a unique bibary tree
 we just need a level order traversal to get back the unique tree
