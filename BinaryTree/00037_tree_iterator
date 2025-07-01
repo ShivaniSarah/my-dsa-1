@@ -186,4 +186,48 @@ class PostorderIterator implements Iterator<Integer> {
     }
 }
 
+or
+
+// fully lazy => occupy less space
+
+
+
+import java.util.*;
+
+class PostorderIterator implements Iterator<Integer> {
+    private Stack<TreeNode> stack = new Stack<>();
+    private TreeNode current;
+    private TreeNode lastVisited = null;
+
+    public PostorderIterator(TreeNode root) {
+        current = root;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return current != null || !stack.isEmpty();
+    }
+
+    @Override
+    public Integer next() {
+        if (!hasNext()) throw new NoSuchElementException();
+
+        while (current != null) {
+            stack.push(current);
+            current = current.left;
+        }
+
+        TreeNode peek = stack.peek();
+
+        if (peek.right != null && lastVisited != peek.right) {
+            current = peek.right;
+            return next(); // recursive call to handle right subtree first
+        }
+
+        stack.pop();
+        lastVisited = peek;
+        return peek.val;
+    }
+}
+
 
