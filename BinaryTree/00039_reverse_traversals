@@ -1,0 +1,257 @@
+// using recursion
+
+class TreeNode {
+    int val;
+    TreeNode left, right;
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+
+public class ReverseTreeTraversals {
+
+    // Reverse Inorder: Right -> Node -> Left
+    public static void reverseInorder(TreeNode root) {
+        if (root == null) return;
+        reverseInorder(root.right);
+        System.out.print(root.val + " ");
+        reverseInorder(root.left);
+    }
+
+    // Reverse Preorder: Node -> Right -> Left
+    public static void reversePreorder(TreeNode root) {
+        if (root == null) return;
+        System.out.print(root.val + " ");
+        reversePreorder(root.right);
+        reversePreorder(root.left);
+    }
+
+    // Reverse Postorder: Right -> Left -> Node
+    public static void reversePostorder(TreeNode root) {
+        if (root == null) return;
+        reversePostorder(root.right);
+        reversePostorder(root.left);
+        System.out.print(root.val + " ");
+    }
+
+    // Build and test
+    public static void main(String[] args) {
+        /*
+                1
+               / \
+              2   3
+             / \
+            4   5
+        */
+
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+
+        System.out.print("Reverse Inorder   : ");
+        reverseInorder(root);
+        System.out.println();
+
+        System.out.print("Reverse Preorder  : ");
+        reversePreorder(root);
+        System.out.println();
+
+        System.out.print("Reverse Postorder : ");
+        reversePostorder(root);
+        System.out.println();
+    }
+}
+
+
+
+
+// using one stack
+
+
+
+import java.util.Stack;
+
+class TreeNode {
+    int val;
+    TreeNode left, right;
+    TreeNode(int val) { this.val = val; }
+}
+
+public class ReverseTraversalsOneStack {
+
+    // Reverse Inorder: Right → Node → Left
+    public static void reverseInorder(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
+                stack.push(current);
+                current = current.right;
+            }
+            current = stack.pop();
+            System.out.print(current.val + " ");
+            current = current.left;
+        }
+    }
+
+    // Reverse Preorder: Node → Right → Left
+    public static void reversePreorder(TreeNode root) {
+        if (root == null) return;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            System.out.print(node.val + " ");
+            // Push left after right so left is processed last
+            if (node.left != null) stack.push(node.left);
+            if (node.right != null) stack.push(node.right);
+        }
+    }
+
+    // Reverse Postorder: Right → Left → Node (1 stack version)
+    public static void reversePostorder(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root, lastVisited = null;
+
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
+                stack.push(current);
+                current = current.right;  // go right first
+            }
+
+            TreeNode peek = stack.peek();
+            if (peek.left != null && lastVisited != peek.left) {
+                current = peek.left;  // visit left next
+            } else {
+                System.out.print(peek.val + " ");
+                lastVisited = stack.pop();
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        /*
+                1
+               / \
+              2   3
+             / \
+            4   5
+        */
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+
+        System.out.print("Reverse Inorder   : ");
+        reverseInorder(root);
+        System.out.println();
+
+        System.out.print("Reverse Preorder  : ");
+        reversePreorder(root);
+        System.out.println();
+
+        System.out.print("Reverse Postorder : ");
+        reversePostorder(root);
+        System.out.println();
+    }
+}
+
+
+
+
+// using 2 stack => completely no recursion is used
+
+
+import java.util.Stack;
+
+class TreeNode {
+    int val;
+    TreeNode left, right;
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+
+public class ReverseTraversals {
+
+    // Reverse Inorder: Right → Node → Left
+    public static void reverseInorder(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode current = root;
+
+        while (current != null || !stack.isEmpty()) {
+            while (current != null) {
+                stack.push(current);
+                current = current.right;
+            }
+            current = stack.pop();
+            System.out.print(current.val + " ");
+            current = current.left;
+        }
+    }
+
+    // Reverse Preorder: Node → Right → Left
+    public static void reversePreorder(TreeNode root) {
+        if (root == null) return;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            System.out.print(node.val + " ");
+            if (node.left != null) stack.push(node.left);
+            if (node.right != null) stack.push(node.right);
+        }
+    }
+
+    // Reverse Postorder: Right → Left → Node
+    public static void reversePostorder(TreeNode root) {
+        if (root == null) return;
+        Stack<TreeNode> stack1 = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+        stack1.push(root);
+
+        while (!stack1.isEmpty()) {
+            TreeNode node = stack1.pop();
+            stack2.push(node);
+            if (node.left != null) stack1.push(node.left);
+            if (node.right != null) stack1.push(node.right);
+        }
+
+        while (!stack2.isEmpty()) {
+            System.out.print(stack2.pop().val + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        /*
+                1
+               / \
+              2   3
+             / \
+            4   5
+        */
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+
+        System.out.print("Reverse Inorder   : ");
+        reverseInorder(root);
+        System.out.println();
+
+        System.out.print("Reverse Preorder  : ");
+        reversePreorder(root);
+        System.out.println();
+
+        System.out.print("Reverse Postorder : ");
+        reversePostorder(root);
+        System.out.println();
+    }
+}
