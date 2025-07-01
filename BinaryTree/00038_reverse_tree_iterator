@@ -123,16 +123,21 @@ class ReversePostorderIterator implements Iterator<Integer> {
     public ReversePostorderIterator(TreeNode root) {
         if (root == null) return;
 
-        Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
+        Stack<TreeNode> stack1 = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+        stack1.push(root);
 
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            output.push(node.val); // Node is visited first
+        while (!stack1.isEmpty()) {
+            TreeNode node = stack1.pop();
+            stack2.push(node); // node is processed after children
 
-            // Push left first, then right (so right is processed before left)
-            if (node.left != null) stack.push(node.left);
-            if (node.right != null) stack.push(node.right);
+            // To get RLN: push LEFT first, then RIGHT
+            if (node.right != null) stack1.push(node.right);
+            if (node.left != null) stack1.push(node.left);
+        }
+
+        while (!stack2.isEmpty()) {
+            output.push(stack2.pop().val);
         }
     }
 
@@ -143,7 +148,7 @@ class ReversePostorderIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
+        if (!hasNext()) throw new NoSuchElementException();
         return output.pop();
     }
 }
-
