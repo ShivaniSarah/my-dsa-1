@@ -1,2 +1,13 @@
 if a bst is done inorder traversal , we get array in sorted order ascending
 if a bst is done reverse inorder traversal , we get array in descending order
+
+Because inorder traversal of a BST visits the nodes in ascending sorted order.
+
+🧠 Other traversals and their usage in BST:
+| Traversal  | Order               | Use-case in BST                              |
+| ---------- | ------------------- | -------------------------------------------- |
+| Inorder    | Left → Node → Right | 🔹 Sorted output<br>🔹 Validity check        |
+| Preorder   | Node → Left → Right | 🔹 Rebuild BST (with preorder + inorder)     |
+| Postorder  | Left → Right → Node | 🔹 Used for deleting/freeing BST             |
+| Levelorder | BFS-style           | 🔹 Balanced BST analysis, tree shape insight |
+
