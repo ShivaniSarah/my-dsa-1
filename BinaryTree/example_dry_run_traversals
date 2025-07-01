@@ -9,3 +9,19 @@ example
        / \
       7   8
 
+
+
+inorder 
+LNR 42758136
+RNL 63185724 - inverse
+
+preorder
+
+NLR 12457836
+NRL 13625874 - inverse
+
+
+postorder
+
+LRN 47852631
+RLN 63875421 -inverse
