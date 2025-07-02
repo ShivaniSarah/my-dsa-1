@@ -74,7 +74,7 @@ class Solution {
 
 or
 
-# Morris Traversal
+# Morris Traversal it saves space also
 
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
