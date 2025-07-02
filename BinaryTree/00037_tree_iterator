@@ -171,8 +171,7 @@ class PostorderIterator implements Iterator<Integer> {
             if (node.left != null) stack.push(node.left);
             if (node.right != null) stack.push(node.right);
         }
-        // Now output has reverse postorder → reversing it gives correct postorder
-        Collections.reverse(output);
+        
     }
 
     @Override
