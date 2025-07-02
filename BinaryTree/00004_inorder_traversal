@@ -96,9 +96,7 @@ class Solution {
                     list.add(curr.val);
                     curr = curr.right;
                 }
-      
             } 
-
             else {  // if teh left subtree doesnt exist
                 list.add(curr.val);
                 curr = curr.right;
