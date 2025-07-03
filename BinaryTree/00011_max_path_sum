@@ -86,6 +86,46 @@ class Solution {
         int currHeight = Math.max(leftData, rightData) + root.val;
      
         System.out.println(left.diameter+" "+right.diameter+" "+currHeight+" "+left.height + right.height + root.val );
+        int currDiameter = Math.max(Math.max(left.diameter, right.diameter),
+                 leftData + rightData + root.val) ;
+        
+        return new Info( currDiameter, currHeight );
+
+    }
+
+    public int maxPathSum(TreeNode root) {
+        Info ans = fun(root);
+        return ans.diameter;
+    }
+}
+
+
+or
+
+public class Info {
+    int diameter;
+    int height;
+
+    public Info(int diameter, int height) {
+        this.diameter = diameter;
+        this.height = height;
+    }
+}
+
+class Solution {
+    public Info fun(TreeNode root) {
+        if (root == null) {
+            return new Info(Integer.MIN_VALUE,0 );
+        }
+        Info left = fun(root.left);
+        Info right = fun(root.right);
+
+        int leftData =  Math.max(left.height,0);
+        int rightData =  Math.max(right.height,0);
+        
+        int currHeight = Math.max(leftData, rightData) + root.val;
+     
+        System.out.println(left.diameter+" "+right.diameter+" "+currHeight+" "+left.height + right.height + root.val );
         int currDiameter = Math.max(Math.max(Math.max(left.diameter, right.diameter),
                  currHeight), left.height + right.height + root.val );
         
