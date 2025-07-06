@@ -53,6 +53,51 @@ class Solution {
 
 or
 
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public void flatten(TreeNode root) {
+        flattenTree(root);
+    }
+
+    // Returns the last node (tail) of the flattened subtree
+    private TreeNode flattenTree(TreeNode node) {
+        if (node == null) return null;
+
+        // Flatten left and right subtrees
+        TreeNode leftTail = flattenTree(node.left);
+        TreeNode rightTail = flattenTree(node.right);
+
+        // If there is a left subtree, we insert it between node and node.right
+        if (leftTail != null) {
+            leftTail.right = node.right;
+            node.right = node.left;
+            node.left = null;
+        }
+
+        // Return the tail of the flattened subtree
+        if (rightTail != null) return rightTail;
+        if (leftTail != null) return leftTail;
+        return node;
+    }
+}
+
+
+or
+
 
 /**
  * Definition for a binary tree node.
