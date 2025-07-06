@@ -89,7 +89,7 @@ public class Codec {
         // from the serialized data
         int commaIndex = s.indexOf(",");
         String str = s.substring(0, commaIndex);
-        s.delete(0, commaIndex + 1);
+        s.delete(0, commaIndex + 1);  // deleting the substring so that it doesnt come again
         TreeNode root = new TreeNode(Integer.parseInt(str));
 
         // Use a queue for 
@@ -108,7 +108,7 @@ public class Codec {
             // child from the serialized data
             commaIndex = s.indexOf(",");
             str = s.substring(0, commaIndex);
-            s.delete(0, commaIndex + 1);
+            s.delete(0, commaIndex + 1);   // deleting the substring so that it doesnt come again
             // If the value is not "#", create a new
             // left child and push it to the queue
             if (!str.equals("#")) {
