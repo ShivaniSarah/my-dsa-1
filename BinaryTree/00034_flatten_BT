@@ -95,27 +95,22 @@ or
 class Solution {
     public void flatten(TreeNode root) {
 
-        if (root == null) {
-            return;
-        }
+        if (root == null) return;
 
-        TreeNode temp;
-        TreeNode temp2;
-        TreeNode cur = root;
+        TreeNode rightSubtree, leftRightMost ,cur = root;
 
         while (cur != null) {
-            System.out.println("cur " + cur.val);
             if (cur.left != null) {
-                temp = cur.right;
+                rightSubtree = cur.right;
                 cur.right = cur.left;
                 cur.left = null;
-                temp2 = cur;
+                leftRightMost = cur;
                 while (cur.right != null) {
                     cur = cur.right;
                 }
-                cur.right = temp;
-                if (temp2.right != null)
-                    cur = temp2.right;
+                cur.right = rightSubtree;
+                if (leftRightMost.right != null)
+                    cur = leftRightMost.right;
             } else {
                 cur = cur.right;
             }
