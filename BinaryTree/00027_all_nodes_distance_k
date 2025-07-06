@@ -45,7 +45,7 @@ class Solution {
             for (int i = 0; i < size; i++) {
                 TreeNode top = queue.poll();
 
-                visited.put(top.val, 1);
+                visited.put(top.val, 1);    // marking it as visited so that it does not come again as its child
 
                 if (top.left != null && !visited.containsKey(top.left.val)) {
                     queue.offer(top.left);
