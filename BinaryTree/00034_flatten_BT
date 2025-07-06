@@ -99,8 +99,8 @@ class Solution {
             return;
         }
 
-        TreeNode temp = root;
-        TreeNode temp2 = root;
+        TreeNode temp;
+        TreeNode temp2;
         TreeNode cur = root;
 
         while (cur != null) {
