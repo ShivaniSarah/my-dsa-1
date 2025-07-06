@@ -38,7 +38,11 @@ class Solution {
             map.put(inorder[i],i);
         }
 
-        int [] index={0}; // array is taken for reference type as varaiable will be changing the state in each recursive call
+        int [] index={0}; 
+
+         // array is taken for reference type as varaiable will be changing the state in each recursive call
+        // pass by reference is used so that the change reflected in index in left subtree should reflect in right subtree call 
+        // this we are doing serially we are traversing from index 0 to n-1 in preorder
 
         return helper(preorder,inorder,0,preorder.length-1,map,index);
     }
