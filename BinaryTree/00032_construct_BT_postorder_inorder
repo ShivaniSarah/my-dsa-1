@@ -24,6 +24,12 @@ Output: [3,9,20,null,null,15,7]
  *     }
  * }
  */
+
+ // array is taken for reference type as varaiable will be changing the state in each recursive call
+        // pass by reference is used so that the change reflected in index in left subtree should reflect in right subtree call 
+        // this we are doing serially we are traversing from index 0 to n-1 in postorder
+
+
 class Solution {
     public TreeNode buildTree(int[] inorder, int[] postorder) 
     {
