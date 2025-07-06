@@ -13,6 +13,47 @@ Output: [1,null,2,null,3,null,4,null,5,null,6]
 
 # java
 
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public void flatten(TreeNode root) {
+        if (root == null) return;
+        TreeNode rightSubtree, leftRightMost ,cur = root;
+
+        while (cur != null) {
+            if (cur.left != null) {
+                rightSubtree = cur.right;
+                cur.right = cur.left;
+                cur.left = null;
+                leftRightMost = cur;
+                while (leftRightMost.right != null) {
+                    leftRightMost = leftRightMost.right;
+                }
+                leftRightMost.right = rightSubtree;
+            }
+            cur = cur.right;
+        }
+    }
+}
+
+
+or
+
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -73,47 +114,3 @@ class Solution {
     }
 }
 
-
-or 
-
-
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public void flatten(TreeNode root) {
-
-        if (root == null) return;
-
-        TreeNode rightSubtree, leftRightMost ,cur = root;
-
-        while (cur != null) {
-            if (cur.left != null) {
-                rightSubtree = cur.right;
-                cur.right = cur.left;
-                cur.left = null;
-                leftRightMost = cur;
-                while (cur.right != null) {
-                    cur = cur.right;
-                }
-                cur.right = rightSubtree;
-                if (leftRightMost.right != null)
-                    cur = leftRightMost.right;
-            } else {
-                cur = cur.right;
-            }
-        }
-    }
-}
