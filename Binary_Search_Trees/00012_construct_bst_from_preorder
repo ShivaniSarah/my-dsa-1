@@ -17,6 +17,8 @@ Example 2:
 Input: preorder = [1,3]
 Output: [1,null,3]
 
+one way is to sort the preorder and that will be the inorder traversal and we can then use inorder and preorder to construct unique BST
+
 # java
 
 /**
